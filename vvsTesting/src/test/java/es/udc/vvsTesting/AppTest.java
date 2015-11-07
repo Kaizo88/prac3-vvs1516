@@ -3,6 +3,7 @@ package es.udc.vvsTesting;
 import java.util.List;
 
 import es.udc.vvsTesting.content.Anuncio;
+import es.udc.vvsTesting.content.Cancion;
 import es.udc.vvsTesting.content.Content;
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -65,6 +66,41 @@ public class AppTest
     	assertEquals(lista.size(),1);
     	for(int i =0;i<lista.size();i++){
     		assertEquals(lista.get(i),anuncio1);
+    	}
+    	
+    }
+    public void testCancion(){
+    	//Creamos Canciones
+    	Cancion cancion1 = new Cancion("cancion1",1);
+    	Cancion cancion2 = new Cancion("cancion2",2);
+    	//Comprobamos titulos
+    	assertEquals(cancion1.obtenerTitulo(),"cancion1");
+    	assertEquals(cancion2.obtenerTitulo(),"cancion2");
+    	//Comprobamos duracion
+    	assertEquals(cancion1.obtenerDuracion(),1);
+    	assertEquals(cancion2.obtenerDuracion(),2);
+    	//Comprobamos lista de Reproduccion
+    	List<Content> lista1 = cancion1.obtenerListaReproduccion();
+    	List<Content> lista2 = cancion2.obtenerListaReproduccion();
+    	
+    	assertEquals(lista1.size(),1);
+    	assertEquals(lista2.size(),1);
+    	for(int i =0;i<lista1.size();i++){
+    		assertEquals(lista1.get(i),cancion1);
+    	}
+    	for(int i =0;i<lista2.size();i++){
+    		assertEquals(lista2.get(i),cancion2);
+    	}
+    	lista1=null;
+    	lista2=null;
+    	
+    	//Comprobamos buscar
+    	lista1=cancion1.buscar("can");
+    	assertEquals(lista1.size(),0);
+    	lista1=null;
+    	lista1=cancion1.buscar("cancion1");
+    	for(int i =0;i<lista1.size();i++){
+    		assertEquals(lista1.get(i),cancion1);
     	}
     }
 }
