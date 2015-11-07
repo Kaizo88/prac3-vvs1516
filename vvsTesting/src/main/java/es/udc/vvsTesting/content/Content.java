@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface Content {
 
-	String obtenetTitulo();
+	String obtenerTitulo();
 	
 	int obtenerDuracion();
 	
