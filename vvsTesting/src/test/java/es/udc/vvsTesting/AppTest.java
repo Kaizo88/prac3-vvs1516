@@ -142,11 +142,16 @@ public class AppTest
     	assertEquals(emisora1.obtenerListaReproduccion().get(2),cancion1);
     	//buscar
     	List<Content> lista = emisora1.buscar("PUBLI");
-    	assertEquals(lista.size(),0);
+    	assertEquals(lista.size(),1);
     	lista=null;
     	lista = emisora1.buscar("cancion1");
     	assertEquals(lista.size(),1);
     	assertEquals(lista.get(0).obtenerTitulo(),"cancion1");
+    	lista=null;
+    	lista= emisora1.buscar("cancion");
+    	assertEquals(lista.size(),2);
+    	assertEquals(lista.get(0),cancion2);
+    	assertEquals(lista.get(1),cancion1);
     	
     }
 }

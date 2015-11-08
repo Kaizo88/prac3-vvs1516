@@ -29,7 +29,7 @@ public class Emisora implements Content {
 	public List<Content> buscar(String subChain) {
 		List<Content> lista=new ArrayList<Content>();
 		for(int i=0;i<listaReproduccion.size();i++){
-			if (listaReproduccion.get(i).obtenerTitulo()==subChain) {
+			if (contieneCadena(listaReproduccion.get(i).obtenerTitulo(),subChain)) {
 				lista.add(listaReproduccion.get(i));
 			}
 		}
@@ -89,5 +89,8 @@ public class Emisora implements Content {
 			}
 		}
 	}	
-	
+	private boolean contieneCadena(String str1, String str2){
+		if(str1.toLowerCase().contains(str2.toLowerCase())) return true;
+		else return false;
+	}
 }
