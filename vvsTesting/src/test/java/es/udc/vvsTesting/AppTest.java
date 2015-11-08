@@ -5,6 +5,7 @@ import java.util.List;
 import es.udc.vvsTesting.content.Anuncio;
 import es.udc.vvsTesting.content.Cancion;
 import es.udc.vvsTesting.content.Content;
+import es.udc.vvsTesting.content.Emisora;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -102,5 +103,42 @@ public class AppTest
     	for(int i =0;i<lista1.size();i++){
     		assertEquals(lista1.get(i),cancion1);
     	}
+    }
+    public void testEmisora(){
+    	//Creamos emisora
+    	Emisora emisora1 = new Emisora("emisora1");
+    	//Creamos canciones y publicidad
+    	Cancion cancion1 = new Cancion("cancion1",1);
+    	Cancion cancion2 = new Cancion("cancion2",2);
+    	Anuncio anuncio = new Anuncio();
+    	//Comprobamos titulo emisora
+    	assertEquals(emisora1.obtenerTitulo(),"emisora1");
+    	//Comprobamos duracion = 0
+    	assertEquals(emisora1.obtenerDuracion(),0);
+    	//Insertamos canciones y anuncios
+    	emisora1.agregar(cancion1, null);//insertamos al principio
+    	assertEquals(emisora1.obtenerDuracion(),1);
+    	emisora1.agregar(anuncio, null);//insertamos al principio
+    	assertEquals(emisora1.obtenerDuracion(),6);
+    	emisora1.agregar(anuncio, anuncio);//insertamos despues de anuncio
+    	assertEquals(emisora1.obtenerDuracion(),11);
+    	emisora1.agregar(cancion1, cancion1);//insertamos despues de cancion1
+    	assertEquals(emisora1.obtenerDuracion(),12);
+    	emisora1.agregar(cancion2, null);//insertamos al principio
+    	assertEquals(emisora1.obtenerDuracion(),14);
+    	//Comprobamos que se hayan insertado en el orden correcto
+    	assertEquals(emisora1.obtenerListaReproduccion().get(0),cancion2);
+    	assertEquals(emisora1.obtenerListaReproduccion().get(1),anuncio);
+    	assertEquals(emisora1.obtenerListaReproduccion().get(2),anuncio);
+    	assertEquals(emisora1.obtenerListaReproduccion().get(3),cancion1);
+    	assertEquals(emisora1.obtenerListaReproduccion().get(4),cancion1);
+    	//Borramos duplicados
+    	emisora1.eliminar(anuncio);
+    	assertEquals(emisora1.obtenerDuracion(),9);
+    	emisora1.eliminar(cancion1);
+    	assertEquals(emisora1.obtenerDuracion(),8);
+    	assertEquals(emisora1.obtenerListaReproduccion().get(0),cancion2);
+    	assertEquals(emisora1.obtenerListaReproduccion().get(1),anuncio);
+    	assertEquals(emisora1.obtenerListaReproduccion().get(2),cancion1);
     }
 }
