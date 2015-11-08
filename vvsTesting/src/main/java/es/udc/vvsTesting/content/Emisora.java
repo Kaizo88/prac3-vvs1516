@@ -28,10 +28,11 @@ public class Emisora implements Content {
 
 	public List<Content> buscar(String subChain) {
 		List<Content> lista=new ArrayList<Content>();
-		for(Content content:listaReproduccion)
-			if (content.obtenerTitulo()==subChain) {
-				if (!lista.contains(content))
-					lista.add(this);}
+		for(int i=0;i<listaReproduccion.size();i++){
+			if (listaReproduccion.get(i).obtenerTitulo()==subChain) {
+				lista.add(listaReproduccion.get(i));
+			}
+		}
 		return lista;
 	}
 
