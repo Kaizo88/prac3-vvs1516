@@ -2,7 +2,6 @@ package es.udc.vvsTesting.server;
 
 import junit.framework.TestCase;
 
-import org.junit.Test;
 
 import es.udc.vvsTesting.content.Anuncio;
 import es.udc.vvsTesting.content.Content;
@@ -12,13 +11,11 @@ import es.udc.vvsTesting.utils.UnexistingTokenException;
 
 public class ServidorTest extends TestCase{
 
-	@Test
 	public void testObtenerNombre() {
 		Server server = new Servidor("Prueba", "4691819800");
 		assertEquals("Prueba", server.obtenerNombre());
 	}
 
-	@Test
 	public void testAlta() {
 		Servidor server = new Servidor("Prueba", "4691819800");
 		assertTrue(server.getTokens().isEmpty());
@@ -27,7 +24,6 @@ public class ServidorTest extends TestCase{
 		assertEquals(10, server.getTokens().get(token).intValue());
 	}
 
-	@Test
 	public void testBaja() {
 		Boolean except = false;
 		Servidor server = new Servidor("Prueba", "4691819800");
@@ -50,7 +46,6 @@ public class ServidorTest extends TestCase{
 		assertFalse(server.getTokens().containsKey(token));
 	}
 
-	@Test
 	public void testAgregar() {
 		String tokenAdmin = "4691819800";
 		Boolean except = false;
@@ -74,7 +69,6 @@ public class ServidorTest extends TestCase{
 
 	}
 
-	@Test
 	public void testEliminar() {
 		String tokenAdmin = "4691819800";
 		Boolean except1 = false;

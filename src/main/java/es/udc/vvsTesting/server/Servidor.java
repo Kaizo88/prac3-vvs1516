@@ -61,7 +61,7 @@ public class Servidor implements Server {
 				this.contentList.remove(content);
 			else
 				throw new ContentNotFoundException(content);
-		else throw new InsufficientPermissionsException(token,"agregar", content);
+		else throw new InsufficientPermissionsException(token,"eliminar", content);
 	}
 
 	public Content buscar(String subChain, String token) {
