@@ -10,6 +10,7 @@ import es.udc.vvsTesting.content.Anuncio;
 import es.udc.vvsTesting.content.Content;
 import es.udc.vvsTesting.utils.ContentNotFoundException;
 import es.udc.vvsTesting.utils.InsufficientPermissionsException;
+import es.udc.vvsTesting.utils.SearchLimitReachedException;
 import es.udc.vvsTesting.utils.UnexistingTokenException;
 
 public class Servidor implements Server {
@@ -72,7 +73,7 @@ public class Servidor implements Server {
 	}
 
 	public List<Content> buscar(String subChain, String token)
-			throws UnexistingTokenException {
+			throws UnexistingTokenException, SearchLimitReachedException {
 		List<Content> resultado = new ArrayList<Content>();
 		List<Content> tmp = new ArrayList<Content>();
 		List<Content> tmp2 = new ArrayList<Content>();
@@ -83,11 +84,20 @@ public class Servidor implements Server {
 		}
 		if (this.getTokens().containsKey(token)
 				&& (this.getTokens().get(token).intValue() > 0)) {
-			resultado = tmp2;
 			int restantes = this.getTokens().get(token).intValue();
-			if (restantes > 1) {
+			tmp.clear();
+			if(restantes == 0)
+				throw new SearchLimitReachedException(token);
+			for(int j = 0; j<tmp2.size();j++){
+				tmp.add(tmp2.get(j));
+				restantes--;
+				if(restantes == 0)
+					break;
+			}
+			resultado = tmp;
+			if (restantes > 0) {
 				this.baja(token);
-				this.getTokens().put(token, restantes - 1);
+				this.getTokens().put(token, restantes);
 			} else
 				this.baja(token);
 		} else {
@@ -100,6 +110,7 @@ public class Servidor implements Server {
 					count = 0;
 				}
 				resultado.add(tmp2.get(i-1));
+				
 				count++;
 			}
 		}
