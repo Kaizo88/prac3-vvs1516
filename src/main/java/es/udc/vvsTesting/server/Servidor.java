@@ -77,4 +77,20 @@ public class Servidor implements Server {
 	    return token.toString();
 	}
 
+	public Map<String, Integer> getTokens() {
+		return tokens;
+	}
+
+	public void setTokens(Map<String, Integer> tokens) {
+		this.tokens = tokens;
+	}
+
+	public List<Content> getContentList() {
+		return contentList;
+	}
+
+	public void setContentList(List<Content> contentList) {
+		this.contentList = contentList;
+	}
+
 }
