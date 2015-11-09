@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import es.udc.vvsTesting.content.Anuncio;
 import es.udc.vvsTesting.content.Content;
+import es.udc.vvsTesting.utils.ContentNotFoundException;
 import es.udc.vvsTesting.utils.InsufficientPermissionsException;
 import es.udc.vvsTesting.utils.UnexistingTokenException;
 
@@ -75,7 +76,55 @@ public class ServidorTest extends TestCase{
 
 	@Test
 	public void testEliminar() {
-		//fail("Not yet implemented");
+		String tokenAdmin = "4691819800";
+		Boolean except1 = false;
+		Boolean except2 = false;
+		Servidor server = new Servidor("Prueba", tokenAdmin);
+		Content content = new Anuncio();
+		try {
+			server.agregar(content, tokenAdmin);
+		} catch (InsufficientPermissionsException e) {
+			except1 = true;
+		}
+		assertFalse(except1);
+		
+		except1 = false;
+		try {
+			server.eliminar(content, tokenAdmin+"123");
+		} catch (InsufficientPermissionsException e) {
+			except1 = true;
+		} catch (ContentNotFoundException e) {
+			except2 = true;
+		}
+		
+		assertTrue(except1);
+		assertFalse(except2);
+		except2 = false;
+		except1 = false;
+		
+		try {
+			server.eliminar(content, tokenAdmin);
+		} catch (InsufficientPermissionsException e) {
+			except1 = true;
+		} catch (ContentNotFoundException e) {
+			except2 = true;
+		}
+		assertFalse(except1);
+		assertFalse(except2);
+		assertEquals(0, server.getContentList().size());
+
+		except1 = false;
+		except2 = false;
+		try {
+			server.eliminar(content, tokenAdmin);
+		} catch (InsufficientPermissionsException e) {
+			except1 = true;
+		} catch (ContentNotFoundException e) {
+			except2 = true;
+		}
+		assertFalse(except1);
+		assertTrue(except2);
+		assertEquals(0, server.getContentList().size());
 	}
 
 }
