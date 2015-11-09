@@ -1,4 +1,4 @@
-package es.udc.vvsTesting;
+package es.udc.vvsTesting.content;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import junit.framework.TestSuite;
 /**
  * Unit test for simple App.
  */
-public class AppTest 
+public class ContentTest 
     extends TestCase
 {
     /**
@@ -21,7 +21,7 @@ public class AppTest
      *
      * @param testName name of the test case
      */
-    public AppTest( String testName )
+    public ContentTest( String testName )
     {
         super( testName );
     }
@@ -31,7 +31,7 @@ public class AppTest
      */
     public static Test suite()
     {
-        return new TestSuite( AppTest.class );
+        return new TestSuite( ContentTest.class );
     }
 
     /**
@@ -45,7 +45,7 @@ public class AppTest
     	//test atributos anuncio devuelven los que deben
     	//Creamos anuncios
     	Anuncio anuncio1 = new Anuncio();
-    	Anuncio anuncio2 = new Anuncio();
+    	//Anuncio anuncio2 = new Anuncio();
     	//Comprobamos que el titulo es PUBLICIDAD
     	assertEquals(anuncio1.obtenerTitulo(),"PUBLICIDAD");
     	//Comprobamos que la duracion es 5
