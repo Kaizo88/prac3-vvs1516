@@ -99,7 +99,7 @@ public class ContentTest extends TestCase {
 
 		// Comprobamos buscar
 		lista1 = cancion1.buscar("can");
-		assertEquals(lista1.size(), 0);
+		assertEquals(lista1.size(), 1);
 		lista1 = null;
 		lista1 = cancion1.buscar("cancion1");
 		for (int i = 0; i < lista1.size(); i++) {
