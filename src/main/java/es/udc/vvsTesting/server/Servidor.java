@@ -10,7 +10,6 @@ import es.udc.vvsTesting.content.Anuncio;
 import es.udc.vvsTesting.content.Content;
 import es.udc.vvsTesting.utils.ContentNotFoundException;
 import es.udc.vvsTesting.utils.InsufficientPermissionsException;
-import es.udc.vvsTesting.utils.SearchLimitReachedException;
 import es.udc.vvsTesting.utils.UnexistingTokenException;
 
 public class Servidor implements Server {
@@ -19,7 +18,7 @@ public class Servidor implements Server {
 	private static final String CHARS = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ234567890_";
 
 	private String nombre;
-	private String tokenAdmin;
+	private String tokenAdmin; // token con permisos especiales para agregar y eliminar contenido 
 	private List<Content> contentList;
 	private Map<String, Integer> tokens;
 
@@ -38,14 +37,14 @@ public class Servidor implements Server {
 		String token = "";
 		do {
 			token = getToken(10);
-		} while (tokens.containsKey(token) || token.equals(tokenAdmin));
+		} while (tokens.containsKey(token) || token.equals(tokenAdmin)); // genera un token que no exista en el servidor
 		tokens.put(token, 10);
 		return token;
 	}
 
 	public void baja(String token) throws UnexistingTokenException {
 		if (!tokens.containsKey(token)) {
-			throw new UnexistingTokenException(token);
+			throw new UnexistingTokenException(token); //en caso de que no exista el token, lanza una excepción
 		}
 		tokens.remove(token);
 	}
@@ -56,7 +55,7 @@ public class Servidor implements Server {
 			this.contentList.add(content);
 		else
 			throw new InsufficientPermissionsException(token, "agregar",
-					content);
+					content); // solo permite agregar contenido si el token coincide con tokenAdmin, sino lanza excepción
 
 	}
 
@@ -66,14 +65,14 @@ public class Servidor implements Server {
 			if (this.contentList.contains(content))
 				this.contentList.remove(content);
 			else
-				throw new ContentNotFoundException(content);
+				throw new ContentNotFoundException(content); //no existe el contenido en el servidor
 		else
 			throw new InsufficientPermissionsException(token, "eliminar",
 					content);
 	}
 
 	public List<Content> buscar(String subChain, String token)
-			throws UnexistingTokenException, SearchLimitReachedException {
+			throws UnexistingTokenException {
 		List<Content> resultado = new ArrayList<Content>();
 		List<Content> tmp = new ArrayList<Content>();
 		List<Content> tmp2 = new ArrayList<Content>();
@@ -86,8 +85,6 @@ public class Servidor implements Server {
 				&& (this.getTokens().get(token).intValue() > 0)) {
 			int restantes = this.getTokens().get(token).intValue();
 			tmp.clear();
-			if (restantes == 0)
-				throw new SearchLimitReachedException(token);
 			for (int j = 0; j < tmp2.size(); j++) {
 				tmp.add(tmp2.get(j));
 				restantes--;
@@ -95,10 +92,10 @@ public class Servidor implements Server {
 					break;
 			}
 			resultado = tmp;
-			if (restantes > 0) {
+			if (restantes > 0) { //actualiza el token
 				this.baja(token);
 				this.getTokens().put(token, restantes);
-			} else
+			} else //da de baja el token si ya consumió los 10 contenidos
 				this.baja(token);
 		} else {
 			resultado.add(new Anuncio());
@@ -117,7 +114,7 @@ public class Servidor implements Server {
 		return resultado;
 	}
 
-	private static String getToken(int length) {
+	private static String getToken(int length) { //crea un token aleatorio
 		StringBuilder token = new StringBuilder(length);
 		for (int i = 0; i < length; i++) {
 			token.append(CHARS.charAt(random.nextInt(CHARS.length())));

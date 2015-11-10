@@ -5,7 +5,6 @@ import java.util.List;
 import es.udc.vvsTesting.content.Content;
 import es.udc.vvsTesting.utils.ContentNotFoundException;
 import es.udc.vvsTesting.utils.InsufficientPermissionsException;
-import es.udc.vvsTesting.utils.SearchLimitReachedException;
 import es.udc.vvsTesting.utils.UnexistingTokenException;
 
 public interface Server {
@@ -23,6 +22,6 @@ public interface Server {
 			throws InsufficientPermissionsException, ContentNotFoundException;
 
 	List<Content> buscar(String subChain, String token)
-			throws UnexistingTokenException, SearchLimitReachedException;
+			throws UnexistingTokenException;
 
 }

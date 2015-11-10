@@ -9,7 +9,6 @@ import es.udc.vvsTesting.content.Content;
 import es.udc.vvsTesting.content.Emisora;
 import es.udc.vvsTesting.utils.ContentNotFoundException;
 import es.udc.vvsTesting.utils.InsufficientPermissionsException;
-import es.udc.vvsTesting.utils.SearchLimitReachedException;
 import es.udc.vvsTesting.utils.UnexistingTokenException;
 
 public class ServidorTest extends TestCase {
@@ -125,19 +124,17 @@ public class ServidorTest extends TestCase {
 	}
 
 	public void testBuscar() throws InsufficientPermissionsException,
-			UnexistingTokenException, SearchLimitReachedException {
+			UnexistingTokenException {
 		String tokenAdmin = "4691819800";
 		Servidor server = new Servidor("Prueba", tokenAdmin);
 		Servidor serverPrueba = new Servidor("Vacio", tokenAdmin);
 		String token = server.alta();
 		String tokenPrueba = serverPrueba.alta();
-		Content anuncio = new Anuncio();
 		Content cancion1 = new Cancion("cancion1", 6);
 		Content cancion2 = new Cancion("cancion2", 8);
 		Content cancion3 = new Cancion("cancion3", 10);
 		Content emisora1 = new Emisora("emisora1");
 		Content emisora2 = new Emisora("emisora2");
-		boolean exceptionLimit = false;
 		// Agregamos emisoras y canciones
 		// Emisora1
 		emisora1.agregar(cancion1, null);

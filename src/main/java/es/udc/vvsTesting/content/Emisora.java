@@ -69,7 +69,7 @@ public class Emisora implements Content {
 
 		/*
 		 * Si hay canciones repetidas agregamos después de todas las
-		 * predecesoras ??
+		 * predecesoras 
 		 */
 	}
 

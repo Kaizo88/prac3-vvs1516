@@ -3,7 +3,6 @@ package es.udc.vvsTesting.server;
 import java.util.List;
 
 import es.udc.vvsTesting.content.Content;
-import es.udc.vvsTesting.utils.SearchLimitReachedException;
 import es.udc.vvsTesting.utils.UnexistingTokenException;
 
 public class ServidorConRespaldo extends Servidor {
@@ -18,7 +17,7 @@ public class ServidorConRespaldo extends Servidor {
 
 	@Override
 	public List<Content> buscar(String subChain, String token)
-			throws UnexistingTokenException, SearchLimitReachedException {
+			throws UnexistingTokenException {
 		List<Content> resultado = super.buscar(subChain, token);
 		if (resultado.isEmpty()) {
 			return servidorRespaldo.buscar(subChain, token);
