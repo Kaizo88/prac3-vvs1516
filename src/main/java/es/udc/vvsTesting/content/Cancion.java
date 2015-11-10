@@ -7,9 +7,7 @@ public class Cancion implements Content {
 
 	private String titulo;
 	private int duracion;
-	
-	
-	
+
 	public Cancion(String titulo, int duracion) {
 		this.titulo = titulo;
 		this.duracion = duracion;
@@ -24,24 +22,24 @@ public class Cancion implements Content {
 	}
 
 	public List<Content> obtenerListaReproduccion() {
-		List<Content> lista=new ArrayList<Content>();
+		List<Content> lista = new ArrayList<Content>();
 		lista.add(this);
 		return lista;
 	}
 
 	public List<Content> buscar(String subChain) {
-		List<Content> lista=new ArrayList<Content>();
-		if (subChain==titulo) 
+		List<Content> lista = new ArrayList<Content>();
+		if (subChain == titulo)
 			lista.add(this);
 		return lista;
 	}
 
 	public void agregar(Content content, Content predecesor) {
-		
+
 	}
 
 	public void eliminar(Content content) {
-		
-	}	
-	
+
+	}
+
 }

@@ -7,11 +7,11 @@ public class Emisora implements Content {
 	private String titulo;
 	private int duracion;
 	private List<Content> listaReproduccion;
-	
+
 	public Emisora(String titulo) {
 		this.titulo = titulo;
 		this.duracion = 0;
-		this.listaReproduccion=new ArrayList<Content>();
+		this.listaReproduccion = new ArrayList<Content>();
 	}
 
 	public String obtenerTitulo() {
@@ -27,9 +27,10 @@ public class Emisora implements Content {
 	}
 
 	public List<Content> buscar(String subChain) {
-		List<Content> lista=new ArrayList<Content>();
-		for(int i=0;i<listaReproduccion.size();i++){
-			if (contieneCadena(listaReproduccion.get(i).obtenerTitulo(),subChain)) {
+		List<Content> lista = new ArrayList<Content>();
+		for (int i = 0; i < listaReproduccion.size(); i++) {
+			if (contieneCadena(listaReproduccion.get(i).obtenerTitulo(),
+					subChain)) {
 				lista.add(listaReproduccion.get(i));
 			}
 		}
@@ -37,60 +38,62 @@ public class Emisora implements Content {
 	}
 
 	public void agregar(Content content, Content predecesor) {
-		if (predecesor==null){//insertar por el principio
+		if (predecesor == null) {// insertar por el principio
 			if (listaReproduccion.isEmpty()) {
 				listaReproduccion.add(content);
-				this.duracion=this.duracion+content.obtenerDuracion();
-			}
-			else{
+				this.duracion = this.duracion + content.obtenerDuracion();
+			} else {
 				listaReproduccion.add(0, content);
-				this.duracion=this.duracion+content.obtenerDuracion();
+				this.duracion = this.duracion + content.obtenerDuracion();
 			}
-		}
-		else{//Sino insertar despues de predecesor
+		} else {// Sino insertar despues de predecesor
 			List<Content> listaAux = new ArrayList<Content>();
-			int i=0;
+			int i = 0;
 			if (listaReproduccion.isEmpty()) {
 				listaReproduccion.add(content);
-				this.duracion=this.duracion+content.obtenerDuracion();
-			}
-			else{
-				i=0;
-				while(i<listaReproduccion.size()){
+				this.duracion = this.duracion + content.obtenerDuracion();
+			} else {
+				i = 0;
+				while (i < listaReproduccion.size()) {
 					listaAux.add(listaReproduccion.get(i));
-					if(listaReproduccion.get(i).obtenerTitulo().equals(predecesor.obtenerTitulo())){
+					if (listaReproduccion.get(i).obtenerTitulo()
+							.equals(predecesor.obtenerTitulo())) {
 						listaAux.add(content);
 					}
 					i++;
 				}
-				listaReproduccion=listaAux;
-				this.duracion=this.duracion+content.obtenerDuracion();
+				listaReproduccion = listaAux;
+				this.duracion = this.duracion + content.obtenerDuracion();
 			}
 		}
-		
-		
-		/*Si hay canciones repetidas agregamos después de todas las predecesoras ??*/
+
+		/*
+		 * Si hay canciones repetidas agregamos después de todas las
+		 * predecesoras ??
+		 */
 	}
 
 	public void eliminar(Content content) {
-		if(listaReproduccion.isEmpty()){
-			listaReproduccion=null;
-		}
-		else{
-			int contains=0;
-			for(int i=0;i<listaReproduccion.size();i++){
-				if(listaReproduccion.get(i).equals(content)){
+		if (listaReproduccion.isEmpty()) {
+			return;
+		} else {
+			int contains = 0;
+			for (int i = 0; i < listaReproduccion.size(); i++) {
+				if (listaReproduccion.get(i).equals(content)) {
 					contains++;
 				}
 			}
-			if(contains != 0){
+			if (contains != 0) {
 				listaReproduccion.remove(content);
-				this.duracion=this.duracion-content.obtenerDuracion();
+				this.duracion = this.duracion - content.obtenerDuracion();
 			}
 		}
-	}	
-	private boolean contieneCadena(String str1, String str2){
-		if(str1.toLowerCase().contains(str2.toLowerCase())) return true;
-		else return false;
+	}
+
+	private boolean contieneCadena(String str1, String str2) {
+		if (str1.toLowerCase().contains(str2.toLowerCase()))
+			return true;
+		else
+			return false;
 	}
 }
