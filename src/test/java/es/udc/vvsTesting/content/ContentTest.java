@@ -42,6 +42,7 @@ public class ContentTest extends TestCase {
 		// test atributos anuncio devuelven los que deben
 		// Creamos anuncios
 		Anuncio anuncio1 = new Anuncio();
+		Anuncio anuncio2 = new Anuncio();
 		// Anuncio anuncio2 = new Anuncio();
 		// Comprobamos que el titulo es PUBLICIDAD
 		assertEquals(anuncio1.obtenerTitulo(), "PUBLICIDAD");
@@ -64,6 +65,26 @@ public class ContentTest extends TestCase {
 		// Comprobamos que devuelve una lista con un elemento si se pasa un
 		// String con el titulo exacto
 		lista = null;
+		lista = anuncio1.buscar("PUBLICIDAD");
+		assertEquals(lista.size(), 1);
+		for (int i = 0; i < lista.size(); i++) {
+			assertEquals(lista.get(i), anuncio1);
+		}
+		// agregar
+		lista = null;
+		anuncio1.agregar(anuncio2, null);
+		assertEquals(anuncio1.obtenerDuracion(), 5);
+		assertEquals(anuncio1.obtenerTitulo(), "PUBLICIDAD");
+		lista = anuncio1.buscar("PUBLICIDAD");
+		assertEquals(lista.size(), 1);
+		for (int i = 0; i < lista.size(); i++) {
+			assertEquals(lista.get(i), anuncio1);
+		}
+		// eliminar
+		lista = null;
+		anuncio1.eliminar(anuncio2);
+		assertEquals(anuncio1.obtenerDuracion(), 5);
+		assertEquals(anuncio1.obtenerTitulo(), "PUBLICIDAD");
 		lista = anuncio1.buscar("PUBLICIDAD");
 		assertEquals(lista.size(), 1);
 		for (int i = 0; i < lista.size(); i++) {
@@ -105,6 +126,27 @@ public class ContentTest extends TestCase {
 		for (int i = 0; i < lista1.size(); i++) {
 			assertEquals(lista1.get(i), cancion1);
 		}
+		// agregar
+		lista1 = null;
+		cancion1.agregar(cancion2, null);
+		assertEquals(cancion1.obtenerDuracion(), 1);
+		assertEquals(cancion1.obtenerTitulo(), "cancion1");
+		lista1 = cancion1.buscar("can");
+		assertEquals(lista1.size(), 1);
+		for (int i = 0; i < lista1.size(); i++) {
+			assertEquals(lista1.get(i), cancion1);
+		}
+		// eliminar
+		lista1 = null;
+		cancion1.eliminar(cancion1);
+		assertEquals(cancion1.obtenerDuracion(), 1);
+		assertEquals(cancion1.obtenerTitulo(), "cancion1");
+		lista1 = cancion1.buscar("can");
+		assertEquals(lista1.size(), 1);
+		for (int i = 0; i < lista1.size(); i++) {
+			assertEquals(lista1.get(i), cancion1);
+		}
+
 	}
 
 	public void testEmisora() {
