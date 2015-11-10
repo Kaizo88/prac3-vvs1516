@@ -197,6 +197,34 @@ public class ContentTest extends TestCase {
 		assertEquals(lista.size(), 2);
 		assertEquals(lista.get(0), cancion2);
 		assertEquals(lista.get(1), cancion1);
+		// Borramos todo de la emisora e intentamos borrar
+		lista = null;
+		lista = emisora1.obtenerListaReproduccion();
+		emisora1.eliminar(cancion1);
+		emisora1.eliminar(cancion2);
+		emisora1.eliminar(anuncio);
+
+		lista = null;
+		lista = emisora1.obtenerListaReproduccion();
+		assertEquals(lista.size(), 0);
+
+		emisora1.eliminar(anuncio);
+		lista = null;
+		lista = emisora1.obtenerListaReproduccion();
+		assertEquals(lista.size(), 0);
+
+		emisora1.eliminar(cancion1);
+		lista = null;
+		lista = emisora1.obtenerListaReproduccion();
+		assertEquals(lista.size(), 0);
+
+		// Agregar despues del predecesor si lista vacia
+		// lo inserta sin mas al principio de la lista
+		emisora1.agregar(cancion1, cancion2);
+		lista = null;
+		lista = emisora1.obtenerListaReproduccion();
+		assertEquals(lista.size(), 1);
+		assertEquals(lista.get(0).obtenerTitulo(), "cancion1");
 
 	}
 }
