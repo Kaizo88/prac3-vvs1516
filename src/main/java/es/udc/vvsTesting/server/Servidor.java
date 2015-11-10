@@ -86,12 +86,12 @@ public class Servidor implements Server {
 				&& (this.getTokens().get(token).intValue() > 0)) {
 			int restantes = this.getTokens().get(token).intValue();
 			tmp.clear();
-			if(restantes == 0)
+			if (restantes == 0)
 				throw new SearchLimitReachedException(token);
-			for(int j = 0; j<tmp2.size();j++){
+			for (int j = 0; j < tmp2.size(); j++) {
 				tmp.add(tmp2.get(j));
 				restantes--;
-				if(restantes == 0)
+				if (restantes == 0)
 					break;
 			}
 			resultado = tmp;
@@ -104,13 +104,13 @@ public class Servidor implements Server {
 			resultado.add(new Anuncio());
 			// meter publi
 			int count = 0;
-			for (int i = 1; i < tmp2.size(); i++) {
+			for (int i = 0; i < tmp2.size(); i++) {
 				if (count == 3) {
 					resultado.add(new Anuncio());
 					count = 0;
 				}
-				resultado.add(tmp2.get(i-1));
-				
+				resultado.add(tmp2.get(i));
+
 				count++;
 			}
 		}

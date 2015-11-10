@@ -29,7 +29,7 @@ public class Cancion implements Content {
 
 	public List<Content> buscar(String subChain) {
 		List<Content> lista = new ArrayList<Content>();
-		if (subChain == titulo)
+		if (contieneCadena(titulo, subChain))
 			lista.add(this);
 		return lista;
 	}
@@ -42,4 +42,10 @@ public class Cancion implements Content {
 
 	}
 
+	private boolean contieneCadena(String str1, String str2) {
+		if (str1.toLowerCase().contains(str2.toLowerCase()))
+			return true;
+		else
+			return false;
+	}
 }
