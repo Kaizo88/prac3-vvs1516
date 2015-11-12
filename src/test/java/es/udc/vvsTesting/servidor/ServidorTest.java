@@ -1,12 +1,14 @@
-package es.udc.vvsTesting.server;
+package es.udc.vvsTesting.servidor;
 
 import java.util.List;
 
 import junit.framework.TestCase;
-import es.udc.vvsTesting.content.Anuncio;
-import es.udc.vvsTesting.content.Cancion;
-import es.udc.vvsTesting.content.Content;
-import es.udc.vvsTesting.content.Emisora;
+import es.udc.vvsTesting.contenido.Anuncio;
+import es.udc.vvsTesting.contenido.Cancion;
+import es.udc.vvsTesting.contenido.Contenido;
+import es.udc.vvsTesting.contenido.Emisora;
+import es.udc.vvsTesting.servidor.Servidor;
+import es.udc.vvsTesting.servidor.ServidorImp;
 import es.udc.vvsTesting.utils.ContentNotFoundException;
 import es.udc.vvsTesting.utils.InsufficientPermissionsException;
 import es.udc.vvsTesting.utils.UnexistingTokenException;
@@ -14,12 +16,12 @@ import es.udc.vvsTesting.utils.UnexistingTokenException;
 public class ServidorTest extends TestCase {
 
 	public void testObtenerNombre() {
-		Server server = new Servidor("Prueba", "4691819800");
+		Servidor server = new ServidorImp("Prueba", "4691819800");
 		assertEquals("Prueba", server.obtenerNombre());
 	}
 
 	public void testAlta() {
-		Servidor server = new Servidor("Prueba", "4691819800");
+		ServidorImp server = new ServidorImp("Prueba", "4691819800");
 		assertTrue(server.getTokens().isEmpty());
 		String token = server.alta();
 		assertTrue(server.getTokens().containsKey(token));
@@ -28,7 +30,7 @@ public class ServidorTest extends TestCase {
 
 	public void testBaja() {
 		Boolean except = false;
-		Servidor server = new Servidor("Prueba", "4691819800");
+		ServidorImp server = new ServidorImp("Prueba", "4691819800");
 		assertTrue(server.getTokens().isEmpty());
 		String token = server.alta();
 		assertTrue(!server.getTokens().isEmpty());
@@ -51,8 +53,8 @@ public class ServidorTest extends TestCase {
 	public void testAgregar() {
 		String tokenAdmin = "4691819800";
 		Boolean except = false;
-		Servidor server = new Servidor("Prueba", tokenAdmin);
-		Content content = new Anuncio();
+		ServidorImp server = new ServidorImp("Prueba", tokenAdmin);
+		Contenido content = new Anuncio();
 		try {
 			server.agregar(content, tokenAdmin);
 		} catch (InsufficientPermissionsException e) {
@@ -60,7 +62,7 @@ public class ServidorTest extends TestCase {
 		}
 		assertFalse(except);
 		assertEquals(1, server.getContentList().size());
-		Content content2 = new Anuncio();
+		Contenido content2 = new Anuncio();
 		try {
 			server.agregar(content2, tokenAdmin + "123");
 		} catch (InsufficientPermissionsException e) {
@@ -75,8 +77,8 @@ public class ServidorTest extends TestCase {
 		String tokenAdmin = "4691819800";
 		Boolean except1 = false;
 		Boolean except2 = false;
-		Servidor server = new Servidor("Prueba", tokenAdmin);
-		Content content = new Anuncio();
+		ServidorImp server = new ServidorImp("Prueba", tokenAdmin);
+		Contenido content = new Anuncio();
 		try {
 			server.agregar(content, tokenAdmin);
 		} catch (InsufficientPermissionsException e) {
@@ -126,15 +128,15 @@ public class ServidorTest extends TestCase {
 	public void testBuscar() throws InsufficientPermissionsException,
 			UnexistingTokenException {
 		String tokenAdmin = "4691819800";
-		Servidor server = new Servidor("Prueba", tokenAdmin);
-		Servidor serverPrueba = new Servidor("Vacio", tokenAdmin);
+		ServidorImp server = new ServidorImp("Prueba", tokenAdmin);
+		ServidorImp serverPrueba = new ServidorImp("Vacio", tokenAdmin);
 		String token = server.alta();
 		String tokenPrueba = serverPrueba.alta();
-		Content cancion1 = new Cancion("cancion1", 6);
-		Content cancion2 = new Cancion("cancion2", 8);
-		Content cancion3 = new Cancion("cancion3", 10);
-		Content emisora1 = new Emisora("emisora1");
-		Content emisora2 = new Emisora("emisora2");
+		Contenido cancion1 = new Cancion("cancion1", 6);
+		Contenido cancion2 = new Cancion("cancion2", 8);
+		Contenido cancion3 = new Cancion("cancion3", 10);
+		Contenido emisora1 = new Emisora("emisora1");
+		Contenido emisora2 = new Emisora("emisora2");
 		// Agregamos emisoras y canciones
 		// Emisora1
 		emisora1.agregar(cancion1, null);
@@ -154,7 +156,7 @@ public class ServidorTest extends TestCase {
 
 		// Buscar en un servidor vacio
 		// Si token registrado
-		List<Content> lista = serverPrueba.buscar("", tokenPrueba);
+		List<Contenido> lista = serverPrueba.buscar("", tokenPrueba);
 		assertEquals(lista.size(), 0);
 		// Si token no registrado
 		lista = null;

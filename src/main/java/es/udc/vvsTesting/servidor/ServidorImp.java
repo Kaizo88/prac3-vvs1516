@@ -1,4 +1,4 @@
-package es.udc.vvsTesting.server;
+package es.udc.vvsTesting.servidor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,27 +6,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import es.udc.vvsTesting.content.Anuncio;
-import es.udc.vvsTesting.content.Content;
+import es.udc.vvsTesting.contenido.Anuncio;
+import es.udc.vvsTesting.contenido.Contenido;
 import es.udc.vvsTesting.utils.ContentNotFoundException;
 import es.udc.vvsTesting.utils.InsufficientPermissionsException;
 import es.udc.vvsTesting.utils.UnexistingTokenException;
 
-public class Servidor implements Server {
+public class ServidorImp implements Servidor {
 
 	private static final Random random = new Random();
 	private static final String CHARS = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ234567890_";
 
 	private String nombre;
 	private String tokenAdmin; // token con permisos especiales para agregar y eliminar contenido 
-	private List<Content> contentList;
+	private List<Contenido> contentList;
 	private Map<String, Integer> tokens;
 
-	public Servidor(String nombre, String tokenAdmin) {
+	public ServidorImp(String nombre, String tokenAdmin) {
 		this.nombre = nombre;
 		this.tokenAdmin = tokenAdmin;
 		this.tokens = new HashMap<String, Integer>();
-		this.contentList = new ArrayList<Content>();
+		this.contentList = new ArrayList<Contenido>();
 	}
 
 	public String obtenerNombre() {
@@ -49,7 +49,7 @@ public class Servidor implements Server {
 		tokens.remove(token);
 	}
 
-	public void agregar(Content content, String token)
+	public void agregar(Contenido content, String token)
 			throws InsufficientPermissionsException {
 		if (token.equals(tokenAdmin))
 			this.contentList.add(content);
@@ -59,7 +59,7 @@ public class Servidor implements Server {
 
 	}
 
-	public void eliminar(Content content, String token)
+	public void eliminar(Contenido content, String token)
 			throws InsufficientPermissionsException, ContentNotFoundException {
 		if (token.equals(tokenAdmin))
 			if (this.contentList.contains(content))
@@ -71,12 +71,12 @@ public class Servidor implements Server {
 					content);
 	}
 
-	public List<Content> buscar(String subChain, String token)
+	public List<Contenido> buscar(String subChain, String token)
 			throws UnexistingTokenException {
-		List<Content> resultado = new ArrayList<Content>();
-		List<Content> tmp = new ArrayList<Content>();
-		List<Content> tmp2 = new ArrayList<Content>();
-		for (Content c : this.contentList) {
+		List<Contenido> resultado = new ArrayList<Contenido>();
+		List<Contenido> tmp = new ArrayList<Contenido>();
+		List<Contenido> tmp2 = new ArrayList<Contenido>();
+		for (Contenido c : this.contentList) {
 			tmp = c.buscar(subChain);
 			if (tmp.size() != 0)
 				tmp2.addAll(tmp);
@@ -130,11 +130,11 @@ public class Servidor implements Server {
 		this.tokens = tokens;
 	}
 
-	public List<Content> getContentList() {
+	public List<Contenido> getContentList() {
 		return contentList;
 	}
 
-	public void setContentList(List<Content> contentList) {
+	public void setContentList(List<Contenido> contentList) {
 		this.contentList = contentList;
 	}
 

@@ -1,16 +1,16 @@
 package es.udc.vvsTesting.utils;
 
-import es.udc.vvsTesting.content.Content;
+import es.udc.vvsTesting.contenido.Contenido;
 
 @SuppressWarnings("serial")
 public class InsufficientPermissionsException extends Exception {
 
 	String token;
 	String action;
-	Content content;
+	Contenido content;
 
 	public InsufficientPermissionsException(String token, String action,
-			Content content) {
+			Contenido content) {
 		this.action = action;
 		this.content = content;
 		this.token = token;

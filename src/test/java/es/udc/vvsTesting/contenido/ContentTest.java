@@ -1,11 +1,11 @@
-package es.udc.vvsTesting.content;
+package es.udc.vvsTesting.contenido;
 
 import java.util.List;
 
-import es.udc.vvsTesting.content.Anuncio;
-import es.udc.vvsTesting.content.Cancion;
-import es.udc.vvsTesting.content.Content;
-import es.udc.vvsTesting.content.Emisora;
+import es.udc.vvsTesting.contenido.Anuncio;
+import es.udc.vvsTesting.contenido.Cancion;
+import es.udc.vvsTesting.contenido.Contenido;
+import es.udc.vvsTesting.contenido.Emisora;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -50,7 +50,7 @@ public class ContentTest extends TestCase {
 		assertEquals(anuncio1.obtenerDuracion(), 5);
 		// Comprobamos que al obtener la lista de Reproduccion se obtenga una
 		// lista con un elemento el anuncio
-		List<Content> lista = anuncio1.obtenerListaReproduccion();
+		List<Contenido> lista = anuncio1.obtenerListaReproduccion();
 		assertEquals(lista.size(), 1);
 		for (int i = 0; i < lista.size(); i++) {
 			assertEquals(lista.get(i), anuncio1);
@@ -104,8 +104,8 @@ public class ContentTest extends TestCase {
 		assertEquals(cancion1.obtenerDuracion(), 1);
 		assertEquals(cancion2.obtenerDuracion(), 2);
 		// Comprobamos lista de Reproduccion
-		List<Content> lista1 = cancion1.obtenerListaReproduccion();
-		List<Content> lista2 = cancion2.obtenerListaReproduccion();
+		List<Contenido> lista1 = cancion1.obtenerListaReproduccion();
+		List<Contenido> lista2 = cancion2.obtenerListaReproduccion();
 
 		assertEquals(lista1.size(), 1);
 		assertEquals(lista2.size(), 1);
@@ -186,7 +186,7 @@ public class ContentTest extends TestCase {
 		assertEquals(emisora1.obtenerListaReproduccion().get(1), anuncio);
 		assertEquals(emisora1.obtenerListaReproduccion().get(2), cancion1);
 		// buscar
-		List<Content> lista = emisora1.buscar("PUBLI");
+		List<Contenido> lista = emisora1.buscar("PUBLI");
 		assertEquals(lista.size(), 1);
 		lista = null;
 		lista = emisora1.buscar("cancion1");

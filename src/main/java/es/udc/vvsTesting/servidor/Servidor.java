@@ -1,13 +1,13 @@
-package es.udc.vvsTesting.server;
+package es.udc.vvsTesting.servidor;
 
 import java.util.List;
 
-import es.udc.vvsTesting.content.Content;
+import es.udc.vvsTesting.contenido.Contenido;
 import es.udc.vvsTesting.utils.ContentNotFoundException;
 import es.udc.vvsTesting.utils.InsufficientPermissionsException;
 import es.udc.vvsTesting.utils.UnexistingTokenException;
 
-public interface Server {
+public interface Servidor {
 
 	String obtenerNombre();
 
@@ -15,13 +15,13 @@ public interface Server {
 
 	void baja(String token) throws UnexistingTokenException;
 
-	void agregar(Content content, String token)
+	void agregar(Contenido content, String token)
 			throws InsufficientPermissionsException;
 
-	void eliminar(Content content, String token)
+	void eliminar(Contenido content, String token)
 			throws InsufficientPermissionsException, ContentNotFoundException;
 
-	List<Content> buscar(String subChain, String token)
+	List<Contenido> buscar(String subChain, String token)
 			throws UnexistingTokenException;
 
 }

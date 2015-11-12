@@ -1,9 +1,9 @@
-package es.udc.vvsTesting.content;
+package es.udc.vvsTesting.contenido;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Anuncio implements Content {
+public class Anuncio implements Contenido {
 	private String titulo;
 	private int duracion;
 
@@ -20,24 +20,24 @@ public class Anuncio implements Content {
 		return duracion;
 	}
 
-	public List<Content> obtenerListaReproduccion() {
-		List<Content> lista = new ArrayList<Content>();
+	public List<Contenido> obtenerListaReproduccion() {
+		List<Contenido> lista = new ArrayList<Contenido>();
 		lista.add(this);
 		return lista;
 	}
 
-	public List<Content> buscar(String subChain) {
-		List<Content> lista = new ArrayList<Content>();
+	public List<Contenido> buscar(String subChain) {
+		List<Contenido> lista = new ArrayList<Contenido>();
 		if (subChain == titulo)
 			lista.add(this);
 		return lista;
 	}
 
-	public void agregar(Content content, Content predecesor) {
+	public void agregar(Contenido content, Contenido predecesor) {
 
 	}
 
-	public void eliminar(Content content) {
+	public void eliminar(Contenido content) {
 
 	}
 

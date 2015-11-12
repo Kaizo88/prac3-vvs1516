@@ -1,17 +1,17 @@
-package es.udc.vvsTesting.content;
+package es.udc.vvsTesting.contenido;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Emisora implements Content {
+public class Emisora implements Contenido {
 	private String titulo;
 	private int duracion;
-	private List<Content> listaReproduccion;
+	private List<Contenido> listaReproduccion;
 
 	public Emisora(String titulo) {
 		this.titulo = titulo;
 		this.duracion = 0;
-		this.listaReproduccion = new ArrayList<Content>();
+		this.listaReproduccion = new ArrayList<Contenido>();
 	}
 
 	public String obtenerTitulo() {
@@ -22,22 +22,22 @@ public class Emisora implements Content {
 		return duracion;
 	}
 
-	public List<Content> obtenerListaReproduccion() {
+	public List<Contenido> obtenerListaReproduccion() {
 		return listaReproduccion;
 	}
 
-	public List<Content> buscar(String subChain) {
-		List<Content> lista = new ArrayList<Content>();
+	public List<Contenido> buscar(String subCadena) {
+		List<Contenido> lista = new ArrayList<Contenido>();
 		for (int i = 0; i < listaReproduccion.size(); i++) {
 			if (contieneCadena(listaReproduccion.get(i).obtenerTitulo(),
-					subChain)) {
+					subCadena)) {
 				lista.add(listaReproduccion.get(i));
 			}
 		}
 		return lista;
 	}
 
-	public void agregar(Content content, Content predecesor) {
+	public void agregar(Contenido content, Contenido predecesor) {
 		if (predecesor == null) {// insertar por el principio
 			if (listaReproduccion.isEmpty()) {
 				listaReproduccion.add(content);
@@ -47,7 +47,7 @@ public class Emisora implements Content {
 				this.duracion = this.duracion + content.obtenerDuracion();
 			}
 		} else {// Sino insertar despues de predecesor
-			List<Content> listaAux = new ArrayList<Content>();
+			List<Contenido> listaAux = new ArrayList<Contenido>();
 			int i = 0;
 			if (listaReproduccion.isEmpty()) {
 				listaReproduccion.add(content);
@@ -73,7 +73,7 @@ public class Emisora implements Content {
 		 */
 	}
 
-	public void eliminar(Content content) {
+	public void eliminar(Contenido content) {
 		if (listaReproduccion.isEmpty()) {
 			return;
 		} else {
