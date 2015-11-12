@@ -39,7 +39,7 @@ public class Cancion implements Contenido {
 	}
 
 	public void eliminar(Contenido content) {
-
+		
 	}
 
 	private boolean contieneCadena(String str1, String str2) {
