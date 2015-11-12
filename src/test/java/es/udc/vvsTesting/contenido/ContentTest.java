@@ -72,7 +72,14 @@ public class ContentTest extends TestCase {
 		}
 		// agregar
 		lista = null;
-		anuncio1.agregar(anuncio2, null);
+		boolean catched = false;
+		try {
+			anuncio1.agregar(anuncio2, null);
+		} catch (Exception e) {
+			catched = true;
+		}
+		assertTrue(catched);
+		catched = false;
 		assertEquals(anuncio1.obtenerDuracion(), 5);
 		assertEquals(anuncio1.obtenerTitulo(), "PUBLICIDAD");
 		lista = anuncio1.buscar("PUBLICIDAD");
@@ -82,7 +89,13 @@ public class ContentTest extends TestCase {
 		}
 		// eliminar
 		lista = null;
-		anuncio1.eliminar(anuncio2);
+		try {
+			anuncio1.eliminar(anuncio2);
+		} catch (Exception e) {
+			catched = true;
+		}
+		assertTrue(catched);
+		catched = false;
 		assertEquals(anuncio1.obtenerDuracion(), 5);
 		assertEquals(anuncio1.obtenerTitulo(), "PUBLICIDAD");
 		lista = anuncio1.buscar("PUBLICIDAD");
@@ -127,8 +140,15 @@ public class ContentTest extends TestCase {
 			assertEquals(lista1.get(i), cancion1);
 		}
 		// agregar
+		boolean catched = false;
 		lista1 = null;
-		cancion1.agregar(cancion2, null);
+		try {
+			cancion1.agregar(cancion2, null);
+		} catch (Exception e) {
+			catched = true;
+		}
+		assertTrue(catched);
+		catched = false;
 		assertEquals(cancion1.obtenerDuracion(), 1);
 		assertEquals(cancion1.obtenerTitulo(), "cancion1");
 		lista1 = cancion1.buscar("can");
@@ -138,7 +158,13 @@ public class ContentTest extends TestCase {
 		}
 		// eliminar
 		lista1 = null;
-		cancion1.eliminar(cancion1);
+		try {
+			cancion1.agregar(cancion1, null);
+		} catch (Exception e) {
+			catched = true;
+		}
+		assertTrue(catched);
+		catched = false;
 		assertEquals(cancion1.obtenerDuracion(), 1);
 		assertEquals(cancion1.obtenerTitulo(), "cancion1");
 		lista1 = cancion1.buscar("can");
