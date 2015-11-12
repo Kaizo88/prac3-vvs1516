@@ -159,7 +159,7 @@ public class ContentTest extends TestCase {
 		// eliminar
 		lista1 = null;
 		try {
-			cancion1.agregar(cancion1, null);
+			cancion1.eliminar(cancion1);
 		} catch (Exception e) {
 			catched = true;
 		}

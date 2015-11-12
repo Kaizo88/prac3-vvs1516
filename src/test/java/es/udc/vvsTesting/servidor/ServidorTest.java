@@ -1,6 +1,9 @@
 package es.udc.vvsTesting.servidor;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import junit.framework.TestCase;
 import es.udc.vvsTesting.contenido.Anuncio;
@@ -123,6 +126,22 @@ public class ServidorTest extends TestCase {
 		assertFalse(except1);
 		assertTrue(except2);
 		assertEquals(0, server.getContentList().size());
+	}
+	
+	public void setTokens(){
+		ServidorImp servidor = new ServidorImp("hola", "hola");
+		Map<String, Integer> tokens = new HashMap<String, Integer>();
+		servidor.setTokens(tokens);
+		assertEquals(servidor.getTokens(), tokens);
+
+		
+	}
+	
+	public void setContentList(){
+		ServidorImp servidor = new ServidorImp("hola", "hola");
+		ArrayList<Contenido> content = new ArrayList<Contenido>();
+		servidor.setContentList(content);
+		assertEquals(servidor.getContentList(),content);
 	}
 
 	public void testBuscar() throws InsufficientPermissionsException,
