@@ -35,11 +35,11 @@ public class Cancion implements Contenido {
 	}
 
 	public void agregar(Contenido content, Contenido predecesor) {
-
+		throw new UnsupportedOperationException("Agregar no soportado por Cancion");
 	}
 
 	public void eliminar(Contenido content) {
-		
+		throw new UnsupportedOperationException("Eliminar no soportado por Cancion");
 	}
 
 	private boolean contieneCadena(String str1, String str2) {

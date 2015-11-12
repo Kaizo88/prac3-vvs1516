@@ -34,11 +34,10 @@ public class Anuncio implements Contenido {
 	}
 
 	public void agregar(Contenido content, Contenido predecesor) {
-
+		throw new UnsupportedOperationException("Agregar no soportado por Anuncio");
 	}
 
 	public void eliminar(Contenido content) {
-
-	}
+		throw new UnsupportedOperationException("Eliminar no soportado por Anuncio");	}
 
 }
