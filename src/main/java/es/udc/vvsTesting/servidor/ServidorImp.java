@@ -16,6 +16,8 @@ public class ServidorImp implements Servidor {
 
 	private static final Random random = new Random();
 	private static final String CHARS = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ234567890_";
+	private static final int CONTENIDO_ENTRE_ANUNCIOS = 3;
+	private static final int CONTENIDOS_POR_TOKEN = 10;
 
 	private String nombre;
 	private String tokenAdmin; // token con permisos especiales para agregar y eliminar contenido 
@@ -38,7 +40,7 @@ public class ServidorImp implements Servidor {
 		do {
 			token = getToken(10);
 		} while (tokens.containsKey(token) || token.equals(tokenAdmin)); // genera un token que no exista en el servidor
-		tokens.put(token, 10);
+		tokens.put(token, CONTENIDOS_POR_TOKEN);
 		return token;
 	}
 
@@ -102,7 +104,7 @@ public class ServidorImp implements Servidor {
 			// meter publi
 			int count = 0;
 			for (int i = 0; i < tmp2.size(); i++) {
-				if (count == 3) {
+				if (count == CONTENIDO_ENTRE_ANUNCIOS ) {
 					resultado.add(new Anuncio());
 					count = 0;
 				}
