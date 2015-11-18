@@ -128,7 +128,7 @@ public class ServidorTest extends TestCase {
 		assertEquals(0, server.getContentList().size());
 	}
 	
-	public void setTokens(){
+	public void testSetTokens(){
 		ServidorImp servidor = new ServidorImp("hola", "hola");
 		Map<String, Integer> tokens = new HashMap<String, Integer>();
 		servidor.setTokens(tokens);
@@ -137,7 +137,7 @@ public class ServidorTest extends TestCase {
 		
 	}
 	
-	public void setContentList(){
+	public void testSetContentList(){
 		ServidorImp servidor = new ServidorImp("hola", "hola");
 		ArrayList<Contenido> content = new ArrayList<Contenido>();
 		servidor.setContentList(content);
@@ -147,7 +147,7 @@ public class ServidorTest extends TestCase {
 	public void testBuscar() throws InsufficientPermissionsException,
 			UnexistingTokenException {
 		String tokenAdmin = "4691819800";
-		ServidorImp server = new ServidorImp("Prueba", tokenAdmin);
+		ServidorSimple server = new ServidorSimple("Prueba", tokenAdmin);
 		ServidorImp serverPrueba = new ServidorImp("Vacio", tokenAdmin);
 		String token = server.alta();
 		String tokenPrueba = serverPrueba.alta();
