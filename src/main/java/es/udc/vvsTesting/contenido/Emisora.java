@@ -49,11 +49,6 @@ public class Emisora implements Contenido {
 		} else {// Sino insertar despues de predecesor
 			List<Contenido> listaAux = new ArrayList<Contenido>();
 			int i = 0;
-			if (listaReproduccion.isEmpty()) {
-				listaReproduccion.add(content);
-				this.duracion = this.duracion + content.obtenerDuracion();
-			} else {
-				i = 0;
 				while (i < listaReproduccion.size()) {
 					listaAux.add(listaReproduccion.get(i));
 					if (listaReproduccion.get(i).obtenerTitulo()
@@ -64,7 +59,6 @@ public class Emisora implements Contenido {
 				}
 				listaReproduccion = listaAux;
 				this.duracion = this.duracion + content.obtenerDuracion();
-			}
 		}
 
 		/*

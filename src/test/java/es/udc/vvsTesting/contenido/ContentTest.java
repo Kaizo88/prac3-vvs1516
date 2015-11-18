@@ -245,12 +245,12 @@ public class ContentTest extends TestCase {
 		assertEquals(lista.size(), 0);
 
 		// Agregar despues del predecesor si lista vacia
-		// lo inserta sin mas al principio de la lista
+		// no lo inserta
 		emisora1.agregar(cancion1, cancion2);
 		lista = null;
 		lista = emisora1.obtenerListaReproduccion();
-		assertEquals(lista.size(), 1);
-		assertEquals(lista.get(0).obtenerTitulo(), "cancion1");
+		assertEquals(lista.size(), 0);
+	//	assertEquals(lista.get(0).obtenerTitulo(), "cancion1");
 
 	}
 }
