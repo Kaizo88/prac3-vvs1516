@@ -19,7 +19,7 @@ public class ServidorConRespaldo extends ServidorImp {
 	public List<Contenido> buscar(String subChain, String token)
 			throws UnexistingTokenException {
 		List<Contenido> resultado = super.buscar(subChain, token);
-		if (resultado.isEmpty()) {
+		if (resultado.isEmpty() && (!this.servidorRespaldo.equals(null))) {
 			return servidorRespaldo.buscar(subChain, token);
 		} else
 			return resultado;
