@@ -100,17 +100,19 @@ public class ServidorImp implements Servidor {
 			} else //da de baja el token si ya consumió los 10 contenidos
 				this.baja(token);
 		} else {
-			resultado.add(new Anuncio());
-			// meter publi
-			int count = 0;
-			for (int i = 0; i < tmp2.size(); i++) {
-				if (count == CONTENIDO_ENTRE_ANUNCIOS ) {
-					resultado.add(new Anuncio());
-					count = 0;
+			if (tmp2.size()!=0) {
+				resultado.add(new Anuncio());
+				// meter publi
+				int count = 0;
+				for (int i = 0; i < tmp2.size(); i++) {
+					if (count == CONTENIDO_ENTRE_ANUNCIOS ) {
+						resultado.add(new Anuncio());
+						count = 0;
+					}
+					resultado.add(tmp2.get(i));
+	
+					count++;
 				}
-				resultado.add(tmp2.get(i));
-
-				count++;
 			}
 		}
 		return resultado;

@@ -180,8 +180,7 @@ public class ServidorTest extends TestCase {
 		// Si token no registrado
 		lista = null;
 		lista = serverPrueba.buscar("", "0");
-		assertEquals(lista.size(), 1);
-		assertEquals(lista.get(0).obtenerTitulo(), "PUBLICIDAD");
+		assertEquals(lista.size(), 0);
 
 		// Buscar en un servidor con canciones
 		// Si token registrado
@@ -216,6 +215,22 @@ public class ServidorTest extends TestCase {
 		lista = server.buscar("cancion3", token2);
 		assertEquals(lista.size(), 2);
 		assertEquals(lista.get(0).obtenerTitulo(), "PUBLICIDAD");
+	}
+	
+	public void testServidorConRespaldo () throws InsufficientPermissionsException,
+	UnexistingTokenException {
+		String tokenAdmin = "4691819800";
+		ServidorSimple server = new ServidorSimple("Prueba", tokenAdmin);
+		ServidorConRespaldo servidor= new ServidorConRespaldo("Servidor",tokenAdmin,server);
+		String token=servidor.alta();
+		Contenido cancion1 = new Cancion("cancion1", 6);
+		servidor.agregar(cancion1, tokenAdmin);
+		List<Contenido> lista = servidor.buscar("sdfffffr", "");
+		assertEquals(0,lista.size());
+		List<Contenido> lista2 = servidor.buscar("cancion1", token);
+		assertEquals(1,lista2.size());
+
+		
 	}
 
 }
