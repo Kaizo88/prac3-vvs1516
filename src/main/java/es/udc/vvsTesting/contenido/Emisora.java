@@ -57,6 +57,7 @@ public class Emisora implements Contenido {
 					}
 					i++;
 				}
+				// 
 				listaReproduccion = listaAux;
 				this.duracion = this.duracion + content.obtenerDuracion();
 		}
