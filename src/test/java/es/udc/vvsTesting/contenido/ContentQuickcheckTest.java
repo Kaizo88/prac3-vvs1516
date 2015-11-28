@@ -76,14 +76,49 @@ public class ContentQuickcheckTest  {
 			
 			
 			assertEquals(esperado,contenido.obtenerListaReproduccion().size());			
-			/*assertEquals(duracionesperado,contenido.obtenerDuracion());*/
+			assertEquals(duracionesperado,contenido.obtenerDuracion());
 		}	
     	for (Object cat : c.getCategories()) {
     	    System.out.println("[agregarConPrecedenteTest] ===> " + cat + " => " + c.getFrequency(cat));
     	}
 	}
 
+	
+	@Test
+	public void eliminareTest() {
+		Classification c = new Classification();		
+		for (Contenido contenido : Iterables.toIterable(new ContenidoGenerator2())){
+			
+		    Integer anyNumber = integers(0,100).next();
+			String titulo=strings("ab",1,2).next();
+			Cancion cancion=new Cancion(titulo, anyNumber);
+			int apariciones=contarApariciones(contenido,cancion);
+			if (apariciones==0) {
+				c.classifyCall("ausente");
+			}
+		    else  if(apariciones==1){
+			c.classifyCall("presente una vez");
+		    } else {
+	    		c.classifyCall("presente varias veces");
+		    	
+		    }
+			int esperado=contenido.obtenerListaReproduccion().size()-apariciones;
+			int duracionesperado=cancion.obtenerDuracion()-apariciones*contenido.obtenerDuracion();
+			
+			contenido.eliminar(cancion);
+			
+			
+			assertEquals(esperado,contenido.obtenerListaReproduccion().size());		
+			assertEquals(duracionesperado,contenido.obtenerDuracion());
+		}	
+		for (Object cat : c.getCategories()) {
+		    System.out.println("[eliminarTest] ===> " + cat + " => " + c.getFrequency(cat));
+		}
+	}
+
 }
+
+
 
 //genera emisora con canciones
 class ContenidoGenerator implements Generator<Contenido> {
