@@ -205,15 +205,15 @@ public class ContentTest extends TestCase {
 		assertEquals(emisora1.obtenerListaReproduccion().get(4), cancion1);
 		// Borramos duplicados
 		emisora1.eliminar(anuncio);
-		assertEquals(emisora1.obtenerDuracion(), 9);
+		assertEquals(emisora1.obtenerDuracion(), 4);
 		emisora1.eliminar(cancion1);
-		assertEquals(emisora1.obtenerDuracion(), 8);
+		assertEquals(emisora1.obtenerDuracion(), 2);
 		assertEquals(emisora1.obtenerListaReproduccion().get(0), cancion2);
-		assertEquals(emisora1.obtenerListaReproduccion().get(1), anuncio);
-		assertEquals(emisora1.obtenerListaReproduccion().get(2), cancion1);
 		// buscar
-		List<Contenido> lista = emisora1.buscar("PUBLI");
+		List<Contenido> lista = emisora1.buscar("cion2");
 		assertEquals(lista.size(), 1);
+		emisora1.agregar(anuncio, null);
+		emisora1.agregar(cancion1, null);
 		lista = null;
 		lista = emisora1.buscar("cancion1");
 		assertEquals(lista.size(), 1);
@@ -221,8 +221,7 @@ public class ContentTest extends TestCase {
 		lista = null;
 		lista = emisora1.buscar("cancion");
 		assertEquals(lista.size(), 2);
-		assertEquals(lista.get(0), cancion2);
-		assertEquals(lista.get(1), cancion1);
+		assertEquals(lista.get(0), cancion1);
 		// Borramos todo de la emisora e intentamos borrar
 		lista = null;
 		lista = emisora1.obtenerListaReproduccion();

@@ -51,15 +51,15 @@ public class Emisora implements Contenido {
 			int i = 0;
 				while (i < listaReproduccion.size()) {
 					listaAux.add(listaReproduccion.get(i));
-					if (listaReproduccion.get(i).obtenerTitulo()
-							.equals(predecesor.obtenerTitulo())) {
+					if (listaReproduccion.get(i)
+							.equals(predecesor)) {
 						listaAux.add(content);
+						this.duracion = this.duracion + content.obtenerDuracion();
 					}
 					i++;
 				}
 				// 
 				listaReproduccion = listaAux;
-				this.duracion = this.duracion + content.obtenerDuracion();
 		}
 
 		/*
@@ -78,9 +78,10 @@ public class Emisora implements Contenido {
 					contains++;
 				}
 			}
-			if (contains != 0) {
+			while (contains != 0) {
 				listaReproduccion.remove(content);
 				this.duracion = this.duracion - content.obtenerDuracion();
+				contains--;
 			}
 		}
 	}

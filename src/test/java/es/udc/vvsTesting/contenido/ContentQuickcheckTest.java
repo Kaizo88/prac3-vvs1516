@@ -12,13 +12,14 @@ import static net.java.quickcheck.generator.PrimitiveGenerators.integers;
 import static net.java.quickcheck.generator.PrimitiveGenerators.strings;
 import static net.java.quickcheck.generator.CombinedGenerators.lists;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class ContentQuickcheckTest  {
 	
 	private int contarApariciones(Contenido emisora,Contenido contenido){
 		int cont=0;
 		for (Contenido aux:emisora.obtenerListaReproduccion()) {
-			if (contenido.obtenerTitulo().equals(aux.obtenerTitulo())) {
+			if (contenido.equals(aux)) {
 				cont++;
 			}
 		}
@@ -55,10 +56,10 @@ public class ContentQuickcheckTest  {
     	Classification c = new Classification();		
 		for (Contenido contenido : Iterables.toIterable(new ContenidoGenerator2())){
 			
-    	    Integer anyNumber = integers(0,100).next();
+    	    Integer anyNumber = integers(1,10).next();
 			String titulo=strings("ab",1,2).next();
 			Cancion cancion=new Cancion(titulo, anyNumber);
-			Cancion precedente=new Cancion(strings("ab",1,2).next(), integers(0,100).next());
+			Cancion precedente=new Cancion(strings("ab",1,2).next(), integers(1,2).next());
 			int apariciones=contarApariciones(contenido,precedente);
 			if (apariciones==0) {
 				c.classifyCall("no precedente");
@@ -70,7 +71,7 @@ public class ContentQuickcheckTest  {
     	    	
     	    }
 			int esperado=contenido.obtenerListaReproduccion().size()+apariciones;
-			int duracionesperado=cancion.obtenerDuracion()+apariciones*contenido.obtenerDuracion();
+			int duracionesperado=apariciones*cancion.obtenerDuracion()+contenido.obtenerDuracion();
 			
 			contenido.agregar(cancion, precedente);
 			
@@ -89,7 +90,7 @@ public class ContentQuickcheckTest  {
 		Classification c = new Classification();		
 		for (Contenido contenido : Iterables.toIterable(new ContenidoGenerator2())){
 			
-		    Integer anyNumber = integers(0,100).next();
+		    Integer anyNumber = integers(1,10).next();
 			String titulo=strings("ab",1,2).next();
 			Cancion cancion=new Cancion(titulo, anyNumber);
 			int apariciones=contarApariciones(contenido,cancion);
@@ -102,13 +103,11 @@ public class ContentQuickcheckTest  {
 	    		c.classifyCall("presente varias veces");
 		    	
 		    }
-			int esperado=contenido.obtenerListaReproduccion().size()-apariciones;
-			int duracionesperado=cancion.obtenerDuracion()-apariciones*contenido.obtenerDuracion();
+			int duracionesperado=contenido.obtenerDuracion()-apariciones*cancion.obtenerDuracion();
 			
 			contenido.eliminar(cancion);
 			
-			
-			assertEquals(esperado,contenido.obtenerListaReproduccion().size());		
+			assertFalse(contenido.obtenerListaReproduccion().contains(cancion));		
 			assertEquals(duracionesperado,contenido.obtenerDuracion());
 		}	
 		for (Object cat : c.getCategories()) {
@@ -138,11 +137,11 @@ class ContenidoGenerator implements Generator<Contenido> {
 }
 //genera emisora con canciones con pocos variantes(se geneta muchas canciones repetidas)
 class ContenidoGenerator2 implements Generator<Contenido> {
-	Generator<List<String>> lGen = lists(strings("ab",1,2));
+	Generator<List<String>> lGen = lists(strings("ab",1,2),0,100);
 
 	public Contenido next() {
 	    List<String> lista = lGen.next();
-    	Generator<Integer> iGen = integers(0,100);
+    	Generator<Integer> iGen = integers(1,10);
 		Emisora emisora=new Emisora(strings().next());
 		for (String any : lista) { 
 			Cancion cancion =new Cancion(any, iGen.next());
