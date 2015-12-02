@@ -2,22 +2,43 @@ package es.udc.vvsTesting.utils;
 
 import es.udc.vvsTesting.contenido.Contenido;
 
+/**
+ * Clase excepcion.
+ * @author diego.campelo
+ *
+ */
 @SuppressWarnings("serial")
 public class InsufficientPermissionsException extends Exception {
 
-	String token;
-	String action;
-	Contenido content;
-
-	public InsufficientPermissionsException(String token, String action,
-			Contenido content) {
+	/**
+	 * Token.
+	 */
+	private String token;
+	/**
+	 * Accion.
+	 */
+	private String action;
+	/**
+	 * Contenido.
+	 */
+	private Contenido content;
+	/**
+	 * Constructor de la excepcion.
+	 * @param token token usado
+	 * @param action accion a realizar
+	 * @param content contenido
+	 */
+	public InsufficientPermissionsException(final String token,
+			final String action,
+			final Contenido content) {
 		this.action = action;
 		this.content = content;
 		this.token = token;
 		System.out
-				.println("No se puede "
-						+ action
-						+ " el contenido, no se posee el token de administrador. Token usado: "
-						+ token);
+				.println("Imposible "
+						+ this.action
+						+ " , permiso insuficiente"
+						+ "Token usado: "
+						+ this.token);
 	}
 }
