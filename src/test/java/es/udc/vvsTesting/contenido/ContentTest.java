@@ -6,6 +6,7 @@ import es.udc.vvsTesting.contenido.Anuncio;
 import es.udc.vvsTesting.contenido.Cancion;
 import es.udc.vvsTesting.contenido.Contenido;
 import es.udc.vvsTesting.contenido.Emisora;
+import es.udc.vvsTesting.utils.InvalidSongsDurationException;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -106,7 +107,7 @@ public class ContentTest extends TestCase {
 
 	}
 
-	public void testCancion() {
+	public void testCancion() throws InvalidSongsDurationException {
 		// Creamos Canciones
 		Cancion cancion1 = new Cancion("cancion1", 1);
 		Cancion cancion2 = new Cancion("cancion2", 2);
@@ -175,7 +176,7 @@ public class ContentTest extends TestCase {
 
 	}
 
-	public void testEmisora() {
+	public void testEmisora() throws InvalidSongsDurationException {
 		// Creamos emisora
 		Emisora emisora1 = new Emisora("emisora1");
 		// Creamos canciones y publicidad

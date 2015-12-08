@@ -7,6 +7,7 @@ import java.util.Random;
 
 import org.junit.Test;
 
+import es.udc.vvsTesting.utils.InvalidSongsDurationException;
 import net.java.quickcheck.ExtendibleGenerator;
 import net.java.quickcheck.Generator;
 import net.java.quickcheck.characteristic.Classification;
@@ -47,12 +48,18 @@ public class QuickcheckerTest {
 		public Contenido next() {
 			ExtendibleGenerator<Character, String> sGen = strings("abcdeABCDE",
 					1, 5);
-			Generator<Integer> sGen1 = integers(-100,0);
+			Generator<Integer> sGen1 = integers(1,100);
 			if (random.nextInt(4) < 1) {
 				return new Anuncio();
 			} else {
-				return new Cancion(sGen.next(), sGen1.next());
+				try {
+					return new Cancion(sGen.next(), sGen1.next());
+				} catch (InvalidSongsDurationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
+			return null;
 
 		}
 
