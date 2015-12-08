@@ -3,14 +3,19 @@ package es.udc.vvsTesting.contenido;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cancion implements Contenido {
+import es.udc.vvsTesting.utils.InvalidSongsDurationException;
 
+public class Cancion implements Contenido{
 	private String titulo;
 	private int duracion;
 
-	public Cancion(String titulo, int duracion) {
+	public Cancion(String titulo, int duracion) throws InvalidSongsDurationException {
+		if(duracion>0){
 		this.titulo = titulo;
 		this.duracion = duracion;
+		}else{
+			throw new InvalidSongsDurationException(duracion);
+		}
 	}
 
 	public String obtenerTitulo() {

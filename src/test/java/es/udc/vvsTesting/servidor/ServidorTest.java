@@ -14,6 +14,7 @@ import es.udc.vvsTesting.servidor.Servidor;
 import es.udc.vvsTesting.servidor.ServidorImp;
 import es.udc.vvsTesting.utils.ContentNotFoundException;
 import es.udc.vvsTesting.utils.InsufficientPermissionsException;
+import es.udc.vvsTesting.utils.InvalidSongsDurationException;
 import es.udc.vvsTesting.utils.UnexistingTokenException;
 
 public class ServidorTest extends TestCase {
@@ -145,7 +146,7 @@ public class ServidorTest extends TestCase {
 	}
 
 	public void testBuscar() throws InsufficientPermissionsException,
-			UnexistingTokenException {
+			UnexistingTokenException, InvalidSongsDurationException {
 		String tokenAdmin = "4691819800";
 		ServidorSimple server = new ServidorSimple("Prueba", tokenAdmin);
 		ServidorImp serverPrueba = new ServidorImp("Vacio", tokenAdmin);
@@ -218,7 +219,7 @@ public class ServidorTest extends TestCase {
 	}
 	
 	public void testServidorConRespaldo () throws InsufficientPermissionsException,
-	UnexistingTokenException {
+	UnexistingTokenException, InvalidSongsDurationException {
 		String tokenAdmin = "4691819800";
 		ServidorSimple server = new ServidorSimple("Prueba", tokenAdmin);
 		ServidorConRespaldo servidor= new ServidorConRespaldo("Servidor",tokenAdmin,server);
