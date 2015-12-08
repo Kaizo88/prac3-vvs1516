@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import es.udc.vvsTesting.utils.InvalidSongsDurationException;
 import net.java.quickcheck.Generator;
 import net.java.quickcheck.characteristic.Classification;
 import net.java.quickcheck.generator.iterable.Iterables;
@@ -27,12 +28,12 @@ public class ContentQuickcheckTest  {
 	}
 	
 	@Test
-	public void agregarConPrecedenteNuloTest() {
+	public void agregarConPrecedenteNuloTest() throws InvalidSongsDurationException {
 		
     	Classification c = new Classification();
 		for (Contenido contenido : Iterables.toIterable(new ContenidoGenerator())){
 			
-    	    Integer anyNumber = integers(0,100).next();
+    	    Integer anyNumber = integers(1,100).next();
 			String titulo=strings("abc",1,4).next();
 			Cancion cancion=new Cancion(titulo, anyNumber);
 			if (contenido.obtenerListaReproduccion().isEmpty()) {
@@ -52,7 +53,7 @@ public class ContentQuickcheckTest  {
     	}
 	}
 	@Test
-	public void agregarConPrecedenteTest() {
+	public void agregarConPrecedenteTest() throws InvalidSongsDurationException {
     	Classification c = new Classification();		
 		for (Contenido contenido : Iterables.toIterable(new ContenidoGenerator2())){
 			
@@ -86,7 +87,7 @@ public class ContentQuickcheckTest  {
 
 	
 	@Test
-	public void eliminareTest() {
+	public void eliminareTest() throws InvalidSongsDurationException {
 		Classification c = new Classification();		
 		for (Contenido contenido : Iterables.toIterable(new ContenidoGenerator2())){
 			
@@ -125,11 +126,18 @@ class ContenidoGenerator implements Generator<Contenido> {
 
 	public Contenido next() {
 	    List<String> lista = lGen.next();
-    	Generator<Integer> iGen = integers(0,100);
+    	Generator<Integer> iGen = integers(1,100);
 		Emisora emisora=new Emisora(strings().next());
 		for (String any : lista) { 
-			Cancion cancion =new Cancion(any, iGen.next());
-			emisora.agregar(cancion, null);			
+			Cancion cancion;
+			try {
+				cancion = new Cancion(any, iGen.next());
+				emisora.agregar(cancion, null);
+			} catch (InvalidSongsDurationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+						
 		} 	
 		return emisora;		
 	}
@@ -144,8 +152,15 @@ class ContenidoGenerator2 implements Generator<Contenido> {
     	Generator<Integer> iGen = integers(1,10);
 		Emisora emisora=new Emisora(strings().next());
 		for (String any : lista) { 
-			Cancion cancion =new Cancion(any, iGen.next());
-			emisora.agregar(cancion, null);			
+			Cancion cancion;
+			try {
+				cancion = new Cancion(any, iGen.next());
+				emisora.agregar(cancion, null);	
+			} catch (InvalidSongsDurationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+					
 		} 	
 		return emisora;		
 	}
