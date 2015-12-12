@@ -1,4 +1,4 @@
-language: java
+language: java -source 8
 before_install: mvn install -DskipTests=true
 install: mvn test
 after_success:
