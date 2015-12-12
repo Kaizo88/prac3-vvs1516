@@ -132,7 +132,43 @@ public class ServidorTest {
 			
 		}
 	}
-	
+	@Test
+	public void buscarServidorTest(){
+		String tokenAdmin = "4691819800";
+		List<Contenido> buscable = new ArrayList<Contenido>();
+		List<Contenido> resultado = new ArrayList<Contenido>();
+		List<String> tokens = new ArrayList<String>();
+		boolean busca=false;
+		for (Servidor servidor : Iterables.toIterable(new ServidorVacioGenerator())){
+			//Insertar un contenido no aleatorio y que lo devuelva la busqueda
+			String token = servidor.alta();
+			Contenido cancion1;
+			try {
+				cancion1 = new Cancion("aaa",5);
+				servidor.agregar(cancion1, tokenAdmin);
+			} catch (InvalidSongsDurationException e1) {
+				e1.printStackTrace();
+			}
+			catch (InsufficientPermissionsException e) {
+				e.printStackTrace();
+			}
+			try {
+				resultado=servidor.buscar("aaa", token);
+			} catch (UnexistingTokenException e) {
+				e.printStackTrace();
+			}
+			assertEquals(resultado.get(0).obtenerTitulo(),"aaa");
+			//Insertar una cancion aleatoria y que lo devuelva la busqueda
+			//TODO terminar test buscar
+		}
+	}
+	class ServidorVacioGenerator implements Generator<Servidor>{
+		String tokenAdmin = "4691819800";
+		public Servidor next(){
+			Servidor servidor = new ServidorSimple(strings().next(),tokenAdmin);
+			return servidor;
+		}
+	}
 	//Genera servidores
 	class ServidorGenerator implements Generator<Servidor>{
 		String tokenAdmin = "4691819800";
@@ -143,7 +179,7 @@ public class ServidorTest {
 			try {
 				servidor.agregar(contenido, tokenAdmin);
 			} catch (InsufficientPermissionsException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 			return servidor;
@@ -163,7 +199,6 @@ public class ServidorTest {
 					cancion = new Cancion(any, iGen.next());
 					emisora.agregar(cancion, null);
 				} catch (InvalidSongsDurationException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 							
