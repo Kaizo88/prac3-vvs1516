@@ -19,8 +19,10 @@ import es.udc.vvsTesting.contenido.Contenido;
 import es.udc.vvsTesting.contenido.Emisora;
 import es.udc.vvsTesting.servidor.Servidor;
 import es.udc.vvsTesting.servidor.ServidorSimple;
+import es.udc.vvsTesting.utils.ContentNotFoundException;
 import es.udc.vvsTesting.utils.InsufficientPermissionsException;
 import es.udc.vvsTesting.utils.InvalidSongsDurationException;
+import es.udc.vvsTesting.utils.UnexistingTokenException;
 
 public class ServidorTest {
 	@Test
@@ -47,15 +49,90 @@ public class ServidorTest {
 		String token=null;
 		boolean alta=false;
 		for (Servidor servidor : Iterables.toIterable(new ServidorGenerator())){
-			token= servidor.alta();
-			if(token != null){
-				alta=true;
+			Integer numero = integers(1,100).next();
+			for(int i=0;i<numero;i++){
+				token= servidor.alta();
+				if(token != null){
+					alta=true;
+				}
+				assertTrue(alta);
+				alta=false;
 			}
-			assertTrue(alta);
-			alta=false;
 		}
 	    		
 	}
+	@Test
+	public void bajaServidorTest(){
+		for (Servidor servidor : Iterables.toIterable(new ServidorGenerator())){
+			Integer numero = integers(1,100).next();
+			List<String> tokens = new ArrayList<String>();
+			boolean baja=false;
+			for(int i=0;i<numero;i++){
+				tokens.add(servidor.alta());
+			}
+			for(int i=0;i<tokens.size();i++){
+				try {
+					servidor.baja(tokens.get(i));
+					baja=true;
+				} catch (UnexistingTokenException e) {
+					baja=false;
+					e.printStackTrace();
+				}
+				assertTrue(baja);
+				baja=false;
+			}
+		}
+	}
+	@Test
+	public void agregarServidorTest(){
+		boolean agregar = false;
+		String tokenAdmin = "4691819800";
+		for (Servidor servidor : Iterables.toIterable(new ServidorGenerator())){
+			Integer numero = integers(1,100).next();
+			for(int i=0;i<numero;i++){
+				ContenidoGenerator c = new ContenidoGenerator();
+				Contenido contenido = c.next();
+				try {
+					servidor.agregar(contenido, tokenAdmin);
+					agregar = true;
+				} catch (InsufficientPermissionsException e) {
+					agregar=false;
+					e.printStackTrace();
+				}
+				assertTrue(agregar);
+			}
+		}
+	}
+	@Test
+	public void eliminarServidorTest(){
+		boolean eliminar = false;
+		String tokenAdmin = "4691819800";
+		List<Contenido> eliminable = new ArrayList<Contenido>();
+		for (Servidor servidor : Iterables.toIterable(new ServidorGenerator())){
+			Integer numero = integers(1,100).next();
+			for(int i=0;i<numero;i++){
+				ContenidoGenerator c = new ContenidoGenerator();
+				Contenido contenido = c.next();
+				eliminable.add(contenido);
+				try {
+					servidor.agregar(contenido, tokenAdmin);
+					try {
+						servidor.eliminar(contenido, tokenAdmin);
+						eliminar=true;
+					} catch (ContentNotFoundException e) {
+						eliminar=false;
+					}
+					
+				} catch (InsufficientPermissionsException e) {
+					eliminar=false;
+				}
+				assertTrue(eliminar);
+				eliminar=false;
+			}
+			
+		}
+	}
+	
 	//Genera servidores
 	class ServidorGenerator implements Generator<Servidor>{
 		String tokenAdmin = "4691819800";
