@@ -187,7 +187,7 @@ public class ServidorImp implements Servidor {
 			}
 			resultado = tmp;
 			if (restantes > 0) { //actualiza el token
-				this.baja(token);
+				//this.baja(token);
 				this.getTokens().put(token, restantes);
 			} else { //da de baja el token si ya consumió los 10 contenidos
 				this.baja(token);
