@@ -81,7 +81,8 @@
     <version>LATEST</version>
     <configuration>
         <targetClasses>
-            <param>es.udc.vvsTesting.*</param>
+            <param>es.udc.vvsTesting.contenido.*</param>
+            <param>es.udc.vvsTesting.servidor.*</param>
         </targetClasses>
         <targetTests>
             <param>es.udc.vvsTesting.contenido.*</param>
