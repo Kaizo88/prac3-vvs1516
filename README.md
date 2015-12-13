@@ -3,7 +3,7 @@ Practicas del bloque 3 de VVS @ Facultade de Informatica de Coruña. Curso 2015/
 
 Para xerar o site cos reports executar
 ```bash
-"mvn test site" 
+"mvn test org.pitest:pitest-maven:mutationCoverage site"
 ```
 e estes xeraranse na carpeta 
 ```bash target/site/index.html ```
