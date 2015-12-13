@@ -72,7 +72,7 @@ public class EmisoraPerfTest {
 	 * Obtener titulo test.
 	 */
 	public final void obtenerTituloPerformanceTest() {
-		List<Emisora> testElements = new ArrayList<>();
+		List<Emisora> testElements = new ArrayList<Emisora>();
 		for (int i = 0; i < itNumber; i++) {
 			String nombre = "Emi";
 			Emisora emisora = new Emisora(nombre);
@@ -96,7 +96,7 @@ public class EmisoraPerfTest {
 	 */
 	@Test
 	public final void obtenerDuracionPerformanceTest() throws InvalidSongsDurationException {
-		List<Emisora> testElements = new ArrayList<>();
+		List<Emisora> testElements = new ArrayList<Emisora>();
 		for (int i = 0; i < itNumber; i++) {
 			String nombreEmisora = "Emi";
 			Emisora emisora = new Emisora(nombreEmisora);
@@ -126,7 +126,7 @@ public class EmisoraPerfTest {
 	 */
 	@Test
 	public final void obtenerListaReproduccionPerformanceTest() throws InvalidSongsDurationException {
-		List<Emisora> testElements = new ArrayList<>();
+		List<Emisora> testElements = new ArrayList<Emisora>();
 		for (int i = 0; i < itNumber; i++) {
 			String nombreEmisora = "Emi";
 			Emisora emisora = new Emisora(nombreEmisora);
@@ -154,7 +154,7 @@ public class EmisoraPerfTest {
 	 */
 	@Test
 	public final void buscarPerformanceTest() {
-		List<Emisora> testElements = new ArrayList<>();
+		List<Emisora> testElements = new ArrayList<Emisora>();
 		for (int i = 0; i < itNumber; i++) {
 			String nombreEmisora = "Emi";
 			Emisora emisora = new Emisora(nombreEmisora);
@@ -183,8 +183,8 @@ public class EmisoraPerfTest {
 	 */
 	@Test
 	public final void agregarPerformanceTest() throws InvalidSongsDurationException {
-		List<Emisora> testElements = new ArrayList<>();
-		List<Cancion> testSongs = new ArrayList<>();
+		List<Emisora> testElements = new ArrayList<Emisora>();
+		List<Cancion> testSongs = new ArrayList<Cancion>();
 
 		for (int i = 0; i < itNumber; i++) {
 			String nombreEmisora = "Emi";
@@ -212,7 +212,7 @@ public class EmisoraPerfTest {
 	 */
 	@Test
 	public final void eliminarPerformanceTest() throws InvalidSongsDurationException {
-		List<Emisora> testElements = new ArrayList<>();
+		List<Emisora> testElements = new ArrayList<Emisora>();
 
 		String nombreCancion = "c";
 		Integer duracionCancion = 10;

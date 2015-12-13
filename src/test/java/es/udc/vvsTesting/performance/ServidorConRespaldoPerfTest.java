@@ -76,8 +76,8 @@ public class ServidorConRespaldoPerfTest {
 	@Test
 	public final void buscarPerformanceTest() throws InvalidSongsDurationException, InsufficientPermissionsException, UnexistingTokenException  {
 		List<ServidorConRespaldo> testElements = 
-				new ArrayList<>();
-		List<String> tokenValido2 = new ArrayList<>();
+				new ArrayList<ServidorConRespaldo>();
+		List<String> tokenValido2 = new ArrayList<String>();
 		for (int i = 0; i < itNumber; i++) {
 			String nombre ="serv";
 			String tokenValido = "45551";

@@ -71,7 +71,7 @@ public class AnuncioPerfTest {
 		 */
 		@Test
 		public final void obtenerTituloPerformanceTest() {
-			List<Anuncio> testElements = new ArrayList<>();
+			List<Anuncio> testElements = new ArrayList<Anuncio>();
 			for (int i = 0; i < itNumber; i++) {
 				testElements.add(new Anuncio());
 			}
@@ -91,7 +91,7 @@ public class AnuncioPerfTest {
 		 */
 		@Test
 		public final void obtenerDuracionPerformanceTest() {
-			List<Anuncio> testElements = new ArrayList<>();
+			List<Anuncio> testElements = new ArrayList<Anuncio>();
 			for (int i = 0; i < itNumber; i++) {
 				testElements.add(new Anuncio());
 			}
@@ -111,7 +111,7 @@ public class AnuncioPerfTest {
 		 */
 		@Test
 		public final void obtenerListaReproduccionPerformanceTest() {
-			List<Anuncio> testElements = new ArrayList<>();
+			List<Anuncio> testElements = new ArrayList<Anuncio>();
 			for (int i = 0; i < itNumber; i++) {
 				Anuncio anuncio = new Anuncio();
 				testElements.add(anuncio);
@@ -132,7 +132,7 @@ public class AnuncioPerfTest {
 		 */
 		@Test
 		public final void buscarPerformanceTest() {
-			List<Anuncio> testElements = new ArrayList<>();
+			List<Anuncio> testElements = new ArrayList<Anuncio>();
 			for (int i = 0; i < itNumber; i++) {
 				Anuncio anuncio = new Anuncio();
 				testElements.add(anuncio);

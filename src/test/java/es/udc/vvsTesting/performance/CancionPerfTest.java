@@ -72,7 +72,7 @@ public class CancionPerfTest {
 	 */
 	@Test
 	public final void obtenerTituloPerformanceTest() throws InvalidSongsDurationException {
-		List<Cancion> testElements = new ArrayList<>();
+		List<Cancion> testElements = new ArrayList<Cancion>();
 		for (int i = 0; i < itNumber; i++) {
 			String nombre = "Carlos";
 			Integer duracion = 10;
@@ -97,7 +97,7 @@ public class CancionPerfTest {
 	 */
 	@Test
 	public final void obtenerDuracionPerformanceTest() throws InvalidSongsDurationException {
-		List<Cancion> testElements = new ArrayList<>();
+		List<Cancion> testElements = new ArrayList<Cancion>();
 		for (int i = 0; i < itNumber; i++) {
 			String nombre = "Carlos";
 			Integer duracion = 10;
@@ -122,7 +122,7 @@ public class CancionPerfTest {
 	 */
 	@Test
 	public final void obtenerListaReproduccionPerformanceTest() throws InvalidSongsDurationException {
-		List<Cancion> testElements = new ArrayList<>();
+		List<Cancion> testElements = new ArrayList<Cancion>();
 		for (int i = 0; i < itNumber; i++) {
 			String nombre = "Carlos";
 			Integer duracion = 10;
@@ -147,7 +147,7 @@ public class CancionPerfTest {
 	 */
 	@Test
 	public final void buscarPerformanceTest() throws InvalidSongsDurationException {
-		ArrayList<Cancion> testElements = new ArrayList<>();
+		ArrayList<Cancion> testElements = new ArrayList<Cancion>();
 		String nombreBusqueda = "";
 		for (int i = 0; i < itNumber; i++) {
 			String nombre = "Cancion";

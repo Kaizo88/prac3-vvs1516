@@ -76,7 +76,7 @@ public class ServidorSimplePerfTest {
 	 */
 	@Test
 	public final void obtenerNombrePerformanceTest() {
-		List<Servidor> testElements = new ArrayList<>();
+		List<Servidor> testElements = new ArrayList<Servidor>();
 		for (int i = 0; i < itNumber; i++) {
 			String nombre = "serv";
 			Servidor s = new ServidorSimple(nombre, "");
@@ -110,7 +110,7 @@ public class ServidorSimplePerfTest {
 	 */
 	@Test
 	public final void agregarPerformanceTest() throws InsufficientPermissionsException, InvalidSongsDurationException {
-		List<Cancion> testElements = new ArrayList<>();
+		List<Cancion> testElements = new ArrayList<Cancion>();
 		Servidor serv = new ServidorSimple("serv","1");
 
 		for (int i = 0; i < itNumber; i++) {
@@ -140,7 +140,7 @@ public class ServidorSimplePerfTest {
 	 */
 	@Test
 	public final void eliminarPerformanceTest() throws InvalidSongsDurationException, InsufficientPermissionsException, UnexistingTokenException, ContentNotFoundException {
-		List<Servidor> testElements = new ArrayList<>();
+		List<Servidor> testElements = new ArrayList<Servidor>();
 		final String passwd = "1";
 
 		String titulo = "can";
@@ -166,7 +166,7 @@ public class ServidorSimplePerfTest {
 	@Test
 	public void bajaPerformanceTest() throws UnexistingTokenException{
 		List<String> testElements = 
-				new ArrayList<>();
+				new ArrayList<String>();
 		String nombre = "serv";
 		String passwd = "1";
 		Servidor servidor = new ServidorSimple(nombre, passwd);

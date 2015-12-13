@@ -9,6 +9,8 @@
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <graphwalker.version>3.3.0</graphwalker.version>
+    
   </properties>
   <dependencies>
   <dependency>
@@ -32,11 +34,31 @@
         <artifactId>commons-io</artifactId>
         <version>2.1</version>
     </dependency>
-    <dependency>
-      <groupId>org.graphwalker</groupId>
-      <artifactId>graphwalker-core</artifactId>
-      <version>3.3.0</version>
-    </dependency>
+        <dependency>
+            <groupId>org.graphwalker</groupId>
+            <artifactId>graphwalker-core</artifactId>
+            <version>${graphwalker.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.graphwalker</groupId>
+            <artifactId>graphwalker-java</artifactId>
+            <version>${graphwalker.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.graphwalker</groupId>
+            <artifactId>graphwalker-maven-plugin</artifactId>
+            <version>${graphwalker.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+             <version>1.7.7</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.1.2</version>
+        </dependency>
     <dependency>
       <groupId>net.java.quickcheck</groupId>
       <artifactId>quickcheck</artifactId>
@@ -46,6 +68,7 @@
   </dependencies>
 
   <build>
+  	<pluginManagement>
     <plugins><plugin>
       <groupId>org.eluder.coveralls</groupId>
       <artifactId>coveralls-maven-plugin</artifactId>
@@ -82,7 +105,23 @@
         <aggregate>true</aggregate>
       </configuration>
     </plugin>
+            <plugin>
+                <groupId>org.graphwalker</groupId>
+                <artifactId>graphwalker-maven-plugin</artifactId>
+                <version>${graphwalker.version}</version>
+                <!-- Bind goals to the default lifecycle -->
+                <executions>
+                    <execution>
+                        <id>generate-sources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate-sources</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>    
   </plugins>
+  </pluginManagement>
 
 </build>
 <reporting>
