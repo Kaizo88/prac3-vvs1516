@@ -2,6 +2,7 @@ package es.udc.vvsTesting.contenido;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import es.udc.vvsTesting.utils.InvalidSongsDurationException;
 
@@ -48,7 +49,7 @@ public class Cancion implements Contenido{
 	}
 
 	private boolean contieneCadena(String str1, String str2) {
-		if (str1.toLowerCase().contains(str2.toLowerCase()))
+		if (str1.toLowerCase(new Locale("es", "ES")).contains(str2.toLowerCase(new Locale("es", "ES"))))
 			return true;
 		else
 			return false;

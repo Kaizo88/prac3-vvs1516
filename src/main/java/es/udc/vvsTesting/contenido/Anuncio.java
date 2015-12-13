@@ -28,7 +28,7 @@ public class Anuncio implements Contenido {
 
 	public List<Contenido> buscar(String subChain) {
 		List<Contenido> lista = new ArrayList<Contenido>();
-		if (subChain == titulo)
+		if (subChain.equalsIgnoreCase(titulo))
 			lista.add(this);
 		return lista;
 	}
