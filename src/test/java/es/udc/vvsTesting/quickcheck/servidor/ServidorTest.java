@@ -142,7 +142,7 @@ public class ServidorTest {
 		for (Servidor servidor : Iterables.toIterable(new ServidorVacioGenerator())){
 			//Insertar un contenido no aleatorio y que lo devuelva la busqueda
 			String token = servidor.alta();
-			Contenido cancion1;
+			Contenido cancion1 = null;
 			try {
 				cancion1 = new Cancion("aaa",5);
 				servidor.agregar(cancion1, tokenAdmin);
@@ -158,8 +158,43 @@ public class ServidorTest {
 				e.printStackTrace();
 			}
 			assertEquals(resultado.get(0).obtenerTitulo(),"aaa");
+			try {
+				servidor.eliminar(cancion1, tokenAdmin);
+			} catch (InsufficientPermissionsException e1) {
+								e1.printStackTrace();
+			} catch (ContentNotFoundException e1) {
+				e1.printStackTrace();
+			}
 			//Insertar una cancion aleatoria y que lo devuelva la busqueda
 			//TODO terminar test buscar
+			token = servidor.alta();
+			cancion1 = new CancionGenerator().next();
+			String subChain = cancion1.obtenerTitulo();
+			try {
+				servidor.agregar(cancion1, tokenAdmin);
+			} catch (InsufficientPermissionsException e) {
+				e.printStackTrace();
+			}
+			try {
+				resultado=servidor.buscar(subChain, token);
+			} catch (UnexistingTokenException e) {
+				e.printStackTrace();
+			}
+			assertEquals(resultado.get(0).obtenerTitulo(),cancion1.obtenerTitulo());
+			
+		}
+	}
+	class CancionGenerator implements Generator<Contenido>{
+		Generator<Integer> entero = integers(1,100);
+		Generator<String> string = strings();
+		public Contenido next(){
+			Contenido cancion = null;
+			try {
+				cancion = new Cancion(string.next(),entero.next());
+			} catch (InvalidSongsDurationException e) {
+				e.printStackTrace();
+			}
+			return cancion;
 		}
 	}
 	class ServidorVacioGenerator implements Generator<Servidor>{
