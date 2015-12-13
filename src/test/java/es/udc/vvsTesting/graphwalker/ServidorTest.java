@@ -34,11 +34,6 @@ public class ServidorTest extends ExecutionContext implements Server {
 		
 	}
 
-	public void buscar_contenido() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public void Servidor_con_contenido() {
 		assertTrue(s.getTokens().isEmpty());
 		System.out.println("Servidor con contenido");

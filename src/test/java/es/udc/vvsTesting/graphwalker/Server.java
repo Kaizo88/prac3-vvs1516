@@ -10,9 +10,6 @@ public interface Server {
     @Vertex()
     void Ready();
 
-    @Edge()
-    void buscar_contenido();
-
     @Vertex()
     void Servidor_con_contenido();
 
