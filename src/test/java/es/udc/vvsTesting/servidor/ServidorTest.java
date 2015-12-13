@@ -230,8 +230,15 @@ public class ServidorTest extends TestCase {
 		assertEquals(0,lista.size());
 		List<Contenido> lista2 = servidor.buscar("cancion1", token);
 		assertEquals(1,lista2.size());
-
-		
+		ServidorConRespaldo servidor2 = new ServidorConRespaldo("servidor", tokenAdmin, null);
+		lista2 = servidor2.buscar("cancion1", token);
+		assertEquals(0,lista2.size());
+	}
+	
+	public void testGetToken(){
+		Servidor serv = new ServidorSimple("Prueba", "123");
+		String s = serv.alta();
+		assertEquals(s.length(), 10);
 	}
 
 }
