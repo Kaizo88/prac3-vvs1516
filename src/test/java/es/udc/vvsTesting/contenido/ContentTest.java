@@ -253,4 +253,37 @@ public class ContentTest extends TestCase {
 	//	assertEquals(lista.get(0).obtenerTitulo(), "cancion1");
 
 	}
+	
+	public void testException(){
+		boolean catched = false;
+		try{
+			Cancion c = new Cancion("hola",-5);
+		} catch (Exception e){
+			catched = true;
+		}
+		assertTrue(catched);
+	}
+	
+	public void testHashCancion() throws InvalidSongsDurationException{
+		Cancion c = new Cancion("hola",5);
+		assertEquals(c.hashCode(), 3209496);
+		Cancion c2 = new Cancion(null,5);
+		assertEquals(c2.hashCode(), 1116);
+
+	}
+	
+	public void testEqualsCancion() throws InvalidSongsDurationException{
+		Cancion c = new Cancion("a",5);
+		Object d = null;
+		assertFalse(c.equals(d));
+		Cancion c2 = new Cancion(null,5);
+		assertFalse(c2.equals(c));
+
+	}
+	
+	public void testHashAnuncio() throws InvalidSongsDurationException{
+		Anuncio c = new Anuncio();
+		assertEquals(c.hashCode(), -1904769853);
+
+	}
 }
