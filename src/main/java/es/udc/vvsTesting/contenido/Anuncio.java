@@ -57,15 +57,8 @@ public class Anuncio implements Contenido {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Anuncio other = (Anuncio) obj;
-		if (duracion != other.duracion)
-			return false;
-		if (titulo == null) {
-			if (other.titulo != null)
-				return false;
-		} else if (!titulo.equals(other.titulo))
-			return false;
-		return true;
+	
+		 return true;
 	}
 
 }

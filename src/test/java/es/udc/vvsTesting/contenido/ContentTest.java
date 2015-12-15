@@ -286,4 +286,56 @@ public class ContentTest extends TestCase {
 		assertEquals(c.hashCode(), -1904769853);
 
 	}
+	
+	public void testEqualsAnuncioNull(){
+		Anuncio anuncio = new Anuncio();
+		boolean result = anuncio.equals(null);
+		assertEquals(false, result);
+	}
+	
+
+	public void testEqualsAnuncio(){
+		Anuncio anuncio = new Anuncio();
+		Anuncio anuncio2 = new Anuncio();
+		assertEquals(anuncio, anuncio2);
+	}
+	
+	public void testCancionDuracionNegativa() throws InvalidSongsDurationException
+	{
+		Boolean except;
+		try{
+			Cancion cancion = new Cancion("Los burlaos", -1);
+			except = false;
+			
+		}catch(InvalidSongsDurationException e){
+			except=true;
+		}
+		
+		assertTrue(except);
+		
+		try{
+			Cancion cancion2 = new Cancion("Los burlaos",0);
+			except=false;
+		}catch(InvalidSongsDurationException e){
+			except=true;
+		}
+		
+		assertTrue(except);
+		
+	}
+	
+	
+	public void testEqualsCancion2() throws InvalidSongsDurationException
+	{
+		Cancion cancion = new Cancion("Cancion",1);
+		Cancion cancion1= new Cancion("Cancion",2);
+		assertFalse(cancion.equals(cancion1));
+		
+		Cancion cancion2 = new Cancion("Cancion2",2);
+		Cancion cancion3 = new Cancion("Cancion2",2);
+		assertFalse(cancion2.equals(cancion1));
+		assertTrue(cancion2.equals(cancion3));
+		
+	}
+	
 }

@@ -97,7 +97,8 @@ public class ServidorTest extends ExecutionContext implements Server {
 			e.printStackTrace();
 		}		
 	}
-    @Test
+    @SuppressWarnings("deprecation")
+	@Test
     public void runSmokeTest() {
         new TestBuilder()
             .setModel(MODEL_PATH)
@@ -107,7 +108,8 @@ public class ServidorTest extends ExecutionContext implements Server {
             .execute();
     }
 	
-    @Test
+    @SuppressWarnings("deprecation")
+	@Test
     public void runFunctionalTest() {
         new TestBuilder()
             .setModel(MODEL_PATH)
