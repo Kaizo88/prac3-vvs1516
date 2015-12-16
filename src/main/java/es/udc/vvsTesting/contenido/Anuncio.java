@@ -2,42 +2,87 @@ package es.udc.vvsTesting.contenido;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Implementacion de anuncio.
+ * @author jose y pablo
+ *
+ */
 public class Anuncio implements Contenido {
+	/**
+	 * Titulo del anuncio.
+	 */
 	private String titulo;
+	/**
+	 * Duracion del anuncio.
+	 */
 	private int duracion;
+	/**
+	 * Duracion base.
+	 */
+	private static final int DURA = 5;
 
+	/**
+	 * Constructor.
+	 */
 	public Anuncio() {
 		this.titulo = "PUBLICIDAD";
-		this.duracion = 5;
+		this.duracion = DURA;
 	}
-
+	/**
+	 * Metodo que obtiene el titulo del contenido.
+	 * @return String titulo del contenido
+	 */
 	public String obtenerTitulo() {
 		return titulo;
 	}
-
+	/**
+	 * Metodo que obtiene la duracion del contenido.
+	 * @return int duracion del contenido
+	 */
 	public int obtenerDuracion() {
 		return duracion;
 	}
-
+	/**
+	 * Metodo que obtiene la lista de reproduccion del contenido.
+	 * @return List<Contenido> lista de reproduccion del contenido
+	 * */
 	public List<Contenido> obtenerListaReproduccion() {
 		List<Contenido> lista = new ArrayList<Contenido>();
 		lista.add(this);
 		return lista;
 	}
-
-	public List<Contenido> buscar(String subChain) {
+	/**
+	 * Metodo que obtiene la lista de contenidos que coinciden con la busqueda
+	 * por subcadena.
+	 * @param subChain
+	 *            parametro de busqueda
+	 * @return List<Contenido> lista de busquedas
+	 * */
+	public List<Contenido> buscar(final String subChain) {
 		List<Contenido> lista = new ArrayList<Contenido>();
-		if (subChain.equalsIgnoreCase(titulo))
+		if (subChain.equalsIgnoreCase(titulo)) {
 			lista.add(this);
+		}
 		return lista;
 	}
-
-	public void agregar(Contenido content, Contenido predecesor) {
+	/**
+	 * Metodo que agrega un contenido en orden despues de su predecesor si es
+	 * null inserta al principio.
+	 * @param content
+	 *            contenido a agregar
+	 * @param predecesor
+	 *            predecesor despues del cual se debe insertar
+	 * */
+	public void agregar(final Contenido content, final Contenido predecesor) {
 		throw new UnsupportedOperationException("Agregar no soportado por Anuncio");
 	}
 
-	public void eliminar(Contenido content) {
+	/**
+	 * Metodo que elimina la primera aparicion de un contenido.
+	 * @param content
+	 *            contenido a eliminar
+	 * */
+	public void eliminar(final Contenido content) {
 		throw new UnsupportedOperationException("Eliminar no soportado por Anuncio");	}
 
 	@Override
@@ -50,14 +95,16 @@ public class Anuncio implements Contenido {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
+	public boolean equals(final Object obj) {
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
-	
+		}
 		 return true;
 	}
 
